@@ -128,7 +128,7 @@ model = model.to(device)
 criterion = criterion.to(device)
 
 
-from sklearn.metrics import f1_score,confusion_matix as cm
+from sklearn.metrics import f1_score,confusion_matrix as cm
 def binary_accuracy(preds, y):
     """
     Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
