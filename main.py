@@ -91,7 +91,7 @@ class CNN(nn.Module):
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
 N_FILTERS = 100
-FILTER_SIZES = [1,2]
+FILTER_SIZES = [1]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
