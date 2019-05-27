@@ -22,7 +22,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = "glove.840B.300d", 
+                 vectors = "glove.6B.100d", 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -89,7 +89,7 @@ class CNN(nn.Module):
         return self.fc(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 N_FILTERS = 100
 FILTER_SIZES = [3,4,5]
 OUTPUT_DIM = 1
@@ -152,12 +152,12 @@ def train(model, iterator, optimizer, criterion):
   for batch in iterator:
 
       optimizer.zero_grad()
+      print(batch)
+      predictions = model(batch.text).squeeze(1)
 
-      predictions = model(batch.TEXT).squeeze(1)
+      loss = criterion(predictions, batch.label)
 
-      loss = criterion(predictions, batch.LABEL)
-
-      acc = binary_accuracy(predictions, batch.LABEL)
+      acc = binary_accuracy(predictions, batch.label)
 
       loss.backward()
 
