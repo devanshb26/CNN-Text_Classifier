@@ -10,11 +10,14 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None, None), ('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_EvaluationData_labeled.csv',
+#                                         train = 'V1.4_Training.csv',
+#                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
+#                                         test = 'SubtaskA_EvaluationData_labeled.csv',
+                                        train = 'train.tsv',
+                                        validation = 'valid.tsv',
+                                        test = 'test.tsv',
                                         #sort_key=lambda x: len(x.Text),
-                                        format = 'csv',
+                                        format = 'tsv',
                                         fields = fields,
                                         skip_header = False
 )
