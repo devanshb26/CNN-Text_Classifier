@@ -1,7 +1,7 @@
 from torchtext import data
 from torchtext import datasets
 
-TEXT = data.Field(tokenize='spacy)
+TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None, None), (None, None), ('l', LABEL), ('t', TEXT)]
