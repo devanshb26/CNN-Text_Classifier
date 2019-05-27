@@ -13,7 +13,7 @@ train_data, valid_data, test_data = data.TabularDataset.splits(
                                         train = 'V1.4_Training.csv',
                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
                                         test = 'SubtaskA_Trial_Test.csv',
-                                        sort_key=lambda x: len(x.Text),
+                                        #sort_key=lambda x: len(x.Text),
                                         format = 'csv',
                                         fields = fields,
                                         skip_header = False
@@ -33,7 +33,8 @@ BATCH_SIZE = 64
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
-    (train_data, valid_data, test_data), 
+    (train_data, valid_data, test_data),
+    sort_key=lambda x: len(x.Text),
     batch_size = BATCH_SIZE, 
     device = device)
                   
