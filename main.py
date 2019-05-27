@@ -89,7 +89,7 @@ class CNN(nn.Module):
         return self.fc(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 300
 N_FILTERS = 100
 FILTER_SIZES = [3,4,5]
 OUTPUT_DIM = 1
