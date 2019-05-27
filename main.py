@@ -138,8 +138,8 @@ def binary_accuracy(preds, y):
     #round predictions to the closest integer
     rounded_preds = torch.round(torch.sigmoid(preds))
     correct = (rounded_preds == y).float() #convert into float for division
-    print(type(y))
-    print(type(rounded_preds))
+#     print(type(y))
+#     print(type(rounded_preds))
     acc = correct.sum() / len(correct)
     return acc
   
@@ -154,7 +154,7 @@ def train(model, iterator, optimizer, criterion):
   for batch in iterator:
 
       optimizer.zero_grad()
-      print(batch)
+#       print(batch)
       predictions = model(batch.text).squeeze(1)
 
       loss = criterion(predictions, batch.label)
