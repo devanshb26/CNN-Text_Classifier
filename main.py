@@ -13,6 +13,7 @@ train_data, valid_data, test_data = data.TabularDataset.splits(
                                         train = 'V1.4_Training.csv',
                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
                                         test = 'SubtaskA_Trial_Test.csv',
+                                        sort_key=lambda x: len(x.Text),
                                         format = 'csv',
                                         fields = fields,
                                         skip_header = False
