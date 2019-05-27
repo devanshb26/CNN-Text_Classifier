@@ -19,7 +19,7 @@ train_data, valid_data, test_data = data.TabularDataset.splits(
                                         #sort_key=lambda x: len(x.Text),
                                         format = 'tsv',
                                         fields = fields,
-                                        skip_header = False
+                                        skip_header = True
 )
 print(vars(train_data[0]))
 MAX_VOCAB_SIZE = 25_000
