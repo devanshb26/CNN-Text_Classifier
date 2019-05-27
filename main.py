@@ -7,7 +7,7 @@ from torchtext import datasets
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
-fields = [(None, None), (None, None), ('l', LABEL), ('t', TEXT)]
+fields = [(None, None), (None, None), ('label', LABEL), ('text', TEXT)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'train.tsv',
