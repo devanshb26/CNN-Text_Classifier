@@ -7,15 +7,15 @@ from torchtext import datasets
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
-fields = [(None, None), (None, None), ('label', LABEL), ('text', TEXT)]
+fields = [(None, None),('label', LABEL), ('text', TEXT)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'train.tsv',
-                                        validation = 'valid.tsv',
-                                        test = 'test.tsv',
-                                        format = 'tsv',
+                                        train = 'V1.4_Training.csv',
+                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
+                                        test = 'SubtaskA_Trial_Test.csv',
+                                        format = 'csv',
                                         fields = fields,
-                                        skip_header = True
+                                        skip_header = False
 )
 print(vars(train_data[0]))
 MAX_VOCAB_SIZE = 25_000
@@ -137,7 +137,9 @@ def binary_accuracy(preds, y):
 #     print(f1_score(y,preds,average='binary'))
     #round predictions to the closest integer
     rounded_preds = torch.round(torch.sigmoid(preds))
-    correct = (rounded_preds == y).float() #convert into float for division 
+    correct = (rounded_preds == y).float() #convert into float for division
+    print(type(y))
+    print(type(rounded_preds))
     acc = correct.sum() / len(correct)
     return acc
   
