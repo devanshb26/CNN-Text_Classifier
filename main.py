@@ -173,7 +173,7 @@ def train(model, iterator, optimizer, criterion):
 
       epoch_loss += loss.item()
       epoch_acc += acc.item()
-      epoch_f1+=f1
+      epoch_f1+=f1.item()
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
 
 
@@ -197,7 +197,7 @@ def evaluate(model, iterator, criterion):
 
           epoch_loss += loss.item()
           epoch_acc += acc.item()
-          epoch_f1+=f1
+          epoch_f1+=f1.item()
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
 
 
