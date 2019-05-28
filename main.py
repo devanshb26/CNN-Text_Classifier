@@ -96,8 +96,8 @@ class CNN(nn.Module):
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
-N_FILTERS = 100
-FILTER_SIZES = [3,4,5]
+N_FILTERS = 250
+FILTER_SIZES = [2,3,4,5]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
@@ -143,7 +143,7 @@ def binary_accuracy(preds, y):
     #round predictions to the closest integer
     rounded_preds = torch.round(torch.sigmoid(preds))
     correct = (rounded_preds == y).float() #convert into float for division
-    print(len((y.data).cpu().numpy()))
+    #print(len((y.data).cpu().numpy()))
     f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
     
     acc = correct.sum() / len(correct)
