@@ -46,7 +46,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
                   
                   
 class CNN(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, n_filters, filter_sizes, output_dim, 
+    def __init__(self, vocab_size, embedding_dim, n_filters, filter_sizes, output_dim,hidden_dim,
                  dropout, pad_idx):
         
         super().__init__()
@@ -60,7 +60,8 @@ class CNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -91,18 +92,20 @@ class CNN(nn.Module):
         cat = self.dropout(torch.cat(pooled, dim = 1))
 
         #cat = [batch size, n_filters * len(filter_sizes)]
-            
-        return self.fc(cat)
+        f=self.fc1(cat)
+        return self.fc(f)
+        #return self.fc(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
 N_FILTERS = 250
+HIDDEN_DIM=20
 FILTER_SIZES = [2,3,4,5]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, DROPOUT, PAD_IDX)
+model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX)
                   
                   
 def count_parameters(model):
