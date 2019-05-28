@@ -93,7 +93,7 @@ class CNN(nn.Module):
 
         #cat = [batch size, n_filters * len(filter_sizes)]
         f=self.fc1(cat)
-        return self.fc(f)
+        return self.fc2(f)
         #return self.fc(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
