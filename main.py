@@ -166,14 +166,14 @@ def train(model, iterator, optimizer, criterion):
       loss = criterion(predictions, batch.label)
 
       acc,f1 = binary_accuracy(predictions, batch.label)
-
+      print(type(f1))
       loss.backward()
 
       optimizer.step()
 
       epoch_loss += loss.item()
       epoch_acc += acc.item()
-      epoch_f1+=f1.item()
+      epoch_f1=epoch_f1+f1
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
 
 
