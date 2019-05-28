@@ -144,17 +144,17 @@ def binary_accuracy(preds, y):
     rounded_preds = torch.round(torch.sigmoid(preds))
     correct = (rounded_preds == y).float() #convert into float for division
     print(len((y.data).cpu().numpy()))
-    print(f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary'))
+    f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
     
     acc = correct.sum() / len(correct)
-    return acc
+    return acc,f1_score
   
   
 def train(model, iterator, optimizer, criterion):
 
   epoch_loss = 0
   epoch_acc = 0
-
+  epoch_f1=0
   model.train()
 
   for batch in iterator:
@@ -165,7 +165,7 @@ def train(model, iterator, optimizer, criterion):
 
       loss = criterion(predictions, batch.label)
 
-      acc = binary_accuracy(predictions, batch.label)
+      acc,f1 = binary_accuracy(predictions, batch.label)
 
       loss.backward()
 
@@ -173,8 +173,8 @@ def train(model, iterator, optimizer, criterion):
 
       epoch_loss += loss.item()
       epoch_acc += acc.item()
-
-  return epoch_loss / len(iterator), epoch_acc / len(iterator)
+      epoch_f1+=f1
+  return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
 
 
 
@@ -182,7 +182,7 @@ def evaluate(model, iterator, criterion):
 
   epoch_loss = 0
   epoch_acc = 0
-
+  epoch_f1=0
   model.eval()
 
   with torch.no_grad():
@@ -193,12 +193,12 @@ def evaluate(model, iterator, criterion):
 
           loss = criterion(predictions, batch.label)
 
-          acc = binary_accuracy(predictions, batch.label)
+          acc,f1 = binary_accuracy(predictions, batch.label)
 
           epoch_loss += loss.item()
           epoch_acc += acc.item()
-
-  return epoch_loss / len(iterator), epoch_acc / len(iterator)
+          epoch_f1+=f1
+  return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
 
 
 
@@ -217,8 +217,8 @@ for epoch in range(N_EPOCHS):
 
   start_time = time.time()
 
-  train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
-  valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+  train_loss, train_acc,train_f1 = train(model, train_iterator, optimizer, criterion)
+  valid_loss, valid_acc,valid_f1 = evaluate(model, valid_iterator, criterion)
 
   end_time = time.time()
 
@@ -229,16 +229,16 @@ for epoch in range(N_EPOCHS):
       torch.save(model.state_dict(), 'tut4-model.pt')
 
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-  print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
-  print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
+  print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
+  print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
 
 
 
   model.load_state_dict(torch.load('tut4-model.pt'))
 
-test_loss, test_acc = evaluate(model, test_iterator, criterion)
+test_loss, test_acc,test_f1 = evaluate(model, test_iterator, criterion)
 
-print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
 
 
 import spacy
