@@ -9,15 +9,15 @@ LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None, None), ('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
-                                        path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_EvaluationData_labeled.csv',
-#                                         train = 'train.tsv',
-#                                         validation = 'valid.tsv',
-#                                         test = 'test.tsv',
+#                                         path = '',
+#                                         train = 'V1.4_Training.csv',
+#                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
+#                                         test = 'SubtaskA_EvaluationData_labeled.csv',
+                                        train = 'train.tsv',
+                                        validation = 'valid.tsv',
+                                        test = 'test.tsv',
                                         #sort_key=lambda x: len(x.Text),
-                                        format = 'csv',
+                                        format = 'tsv',
                                         fields = fields,
                                         skip_header = True
 )
@@ -96,7 +96,7 @@ class CNN(nn.Module):
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
 N_FILTERS = 100
-FILTER_SIZES = [1]
+FILTER_SIZES = [1,2]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
