@@ -147,7 +147,7 @@ def binary_accuracy(preds, y):
     f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
     
     acc = correct.sum() / len(correct)
-    return acc,f1_score
+    return acc,f1
   
   
 def train(model, iterator, optimizer, criterion):
@@ -197,7 +197,7 @@ def evaluate(model, iterator, criterion):
 
           epoch_loss += loss.item()
           epoch_acc += acc.item()
-          epoch_f1+=f1.item()
+          epoch_f1+=f1
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
 
 
