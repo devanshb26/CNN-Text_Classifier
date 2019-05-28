@@ -144,7 +144,7 @@ def binary_accuracy(preds, y):
     rounded_preds = torch.round(torch.sigmoid(preds))
     correct = (rounded_preds == y).float() #convert into float for division
     print(len((y.data).cpu().numpy()))
-    print(f1_score((y.data).cpu().numpy()),(rounded_preds.data).cpu().numpy()),average='binary'))
+    print(f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary'))
     
     acc = correct.sum() / len(correct)
     return acc
