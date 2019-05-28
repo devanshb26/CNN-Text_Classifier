@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
-
+from ignite.metrics import Precision
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
@@ -145,6 +145,7 @@ def binary_accuracy(preds, y):
     correct = (rounded_preds == y).float() #convert into float for division
 #     print(type(y))
 #     print(type(rounded_preds))
+    print(Precision(rounded_preds,y))
     acc = correct.sum() / len(correct)
     return acc
   
