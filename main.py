@@ -139,14 +139,12 @@ def binary_accuracy(preds, y):
     """
     Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
     """
-#     print(cm(y,preds))
-#     print(f1_score(y,preds,average='binary'))
+    
     #round predictions to the closest integer
     rounded_preds = torch.round(torch.sigmoid(preds))
     correct = (rounded_preds == y).float() #convert into float for division
-    print(correct)
-    print(type(correct))
-    print(dtype(y))
+    print(cm(y.int(),rounded_preds.int()))
+    print(f1_score(y.int(),rounded_preds.int(),average='binary'))
     
     acc = correct.sum() / len(correct)
     return acc
