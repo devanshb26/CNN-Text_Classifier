@@ -56,15 +56,16 @@ class CNN(nn.Module):
         self.convs = nn.ModuleList([
                                     nn.Conv2d(in_channels = 1, 
                                               out_channels = n_filters, 
-                                              kernel_size = (fs, 5)) 
+                                              kernel_size = (fs, embed_dim)) 
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, hidden_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+        self.relu=nn.Relu()
         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
-        self.dropout_2=nn.Dropout(Dropout_2)
+#         self.dropout_2=nn.Dropout(Dropout_2)
         
     def forward(self, text):
         
@@ -85,8 +86,8 @@ class CNN(nn.Module):
         conved = [F.relu(conv(embedded)).squeeze(3) for conv in self.convs]
             
         #conved_n = [batch size, n_filters, sent len - filter_sizes[n] + 1]
-        print(conv.shape[2]+"   "+conv.shape[1] for conv in conved)        
-        pooled = [F.max_pool1d(conv, conv.shape[1]).squeeze(2) for conv in conved]
+#         print(conv.shape[2]+"   "+conv.shape[1] for conv in conved)        
+        pooled = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in conved]
         
         #pooled_n = [batch size, n_filters]
         
@@ -94,7 +95,8 @@ class CNN(nn.Module):
 
         #cat = [batch size, n_filters * len(filter_sizes)]
         f1=self.fc1(cat)
-        d=self.dropout_2(f1)
+        f1_relu=self.relu(f1)
+        d=self.dropout_2(f1_relu)
         return self.fc2(d)
 #         return self.fc(cat)
                  
