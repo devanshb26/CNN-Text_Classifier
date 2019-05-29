@@ -220,7 +220,7 @@ def epoch_time(start_time, end_time):
   return elapsed_mins, elapsed_secs
 
 N_EPOCHS = 50
-best_valid_loss = float('inf')
+best_valid_f1 = float('inf')
 
 for epoch in range(N_EPOCHS):
 
@@ -233,8 +233,8 @@ for epoch in range(N_EPOCHS):
 
   epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-  if valid_loss < best_valid_loss:
-      best_valid_loss = valid_loss
+  if valid_f1 < best_valid_f1:
+      best_valid_f1 = valid_f1
       torch.save(model.state_dict(), 'tut4-model.pt')
 
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
