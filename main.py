@@ -65,7 +65,7 @@ class CNN(nn.Module):
         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
-#         self.dropout_2=nn.Dropout(Dropout_2)
+        self.dropout_2=nn.Dropout(Dropout_2)
         
     def forward(self, text):
         
