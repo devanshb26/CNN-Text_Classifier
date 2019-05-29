@@ -27,7 +27,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = ' glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -60,12 +60,12 @@ class CNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, hidden_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
 #         self.relu=nn.Relu()
-        self.fc2 = nn.Linear(hidden_dim, output_dim)
+#         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
-        self.dropout_2=nn.Dropout(Dropout_2)
+#         self.dropout_2=nn.Dropout(Dropout_2)
         
     def forward(self, text):
         
@@ -94,20 +94,21 @@ class CNN(nn.Module):
         cat = self.dropout(torch.cat(pooled, dim = 1))
 
         #cat = [batch size, n_filters * len(filter_sizes)]
-        f1=self.fc1(cat)
-        f1_relu=F.relu(f1)
-        d=self.dropout_2(f1_relu)
-        return self.fc2(d)
-#         return self.fc(cat)
+#         f1=self.fc1(cat)
+#         f1_relu=F.relu(f1)
+#         d=self.dropout_2(f1_relu)
+#         return self.fc2(d)
+        cat_relu=F.relu(cat)
+        return self.fc1(cat_relu)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3]
+FILTER_SIZES = [2,3,4]
 OUTPUT_DIM = 1
-DROPOUT = 0.5
+DROPOUT = 0.7
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX,Dropout_2)
