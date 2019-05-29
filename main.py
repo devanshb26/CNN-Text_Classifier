@@ -60,7 +60,7 @@ class CNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
