@@ -1,0 +1,834 @@
+labels,data
+0,enable live traffic aware app
+1,try format like bold italic shadow distinguish title subtitle content
+1,computer invent save time suggest allow upload zip file use numbering file portal place right order
+1,allow rearrange user want change
+1,add simd instruction good use arm neon instruction math game
+1,use hot swap code generator optimize machine code like hotspot java helpful mitigate slow c code
+1,microsoft seriously look rid symantec payment stuff
+1,extremely useful variety app type notify start end event able check device use phonecall
+1,like informatin certification process dev center app
+1,nice glance app feature market
+1,fun record featured market date
+1,progressr control available windows phone like win8
+1,great os second etc nfc record try trigger success
+1,need application mobile platform able read datum separate ndef record contain ndef message
+1,provide process class api like regular windows develop low level operation like task manager windows
+1,add possibility set price market distribution trial mode existence individually xap
+0,add ability memory profiling background agent periodic limit memory hard catch memory leak
+0,use .net access library microsoft advise .net app native code winrt component
+0,limit artifically like native developer
+1,page template update use medium sized semibold font default title text
+1,task base operation code clean readable
+1,add boolean cameracapturetask indicate want save picture save camera roll
+1,expose etw log namespace like system diagnostic event possible log event window 8 app
+0,currently way advantage direct manipulation xaml windows store app use scrollviewer
+1,instead chart style list popular app display phone create new form distribution result randomize time user look marketplace
+1,highly rat app appear near appear frequently rating app dwindle
+1,good app game chance decent exposure chart wait feature worth
+1,maybe think way reward user time actually try app review
+1,great able use wp8 emulator surface emulator matter mobility demonstration i.e. deliver dynamics crm demo nearly want include mobility scenario screen rest demo
+0,allow seamless migration new hardware
+1,like ask microsoft tool(option emulator screenshot emulator produce screenshot resolution language support app
+0,run emulator screenshot close run
+1,sharpdx prove key technology available csharp suggest support project provide interface
+1,natural allow physical search key activate search function active application load bing rarely goal
+1,associate bind object data template implicitly type instead explicitly template
+0,information datum binding
+1,wp8 add optional support hook hardware key press event lens plug feature ... hardware key include vol+ vol- stage 1 light press camera shutter stage 2 deep press camera shutter
+1,application problem problem detect advance developer publication correction version client know happen possible microsoft implement communication resource developer customer instal application
+1,read write accsess email sync setting enable application create custom sync profile base week day time position etc
+1,impossible connect easily ftp network suggest include future sdk
+1,hope microsoft open asia voice function fast
+1,need support special multitasking task like voip im
+1,add possibility add spell check service provide datum system wide exist
+1,microsoft create incentive like free device blackberry free year membership amazon drive lot developer platform crucial platform
+1,nice gesture option wich left handed people scroll content
+1,great able emulator location datum use nmea file format file import export use file directly feed
+1,currently pin album useful pin single image tile .. way easy access
+1,user able review people country
+1,app synchronize connect network sporadically handy easy way detect cheap connection wifi connect device connect web usb
+1,suggestion add property like iswificonnect iscableconnected devicenetworkinformation execute fast
+1,developer good explanation wrong enforce good design
+1,app long 2 3 second start need explain longer
+1,provide api forwarding management functions(hold unholdswapconferenceetc
+1,user like able select song device library wake
+1,idea actually developer scroll faster subsequent scroll like 5 scroll scroll speed increase ..
+1,addition user able scree shot multitask area use finger gesture drag app towarda screen screen capture icon appear outer edge icon fill green onve edge completly green photograph noise occur allow sudden screen flare tell user screen shot save save image folder
+1,need ability developer add relevant tag app description need ability search app tag tag verify app submission ensure relevant
+1,pleasant main page app marketplace general présentation screenshot user review
+1,allow user send video audio picture mms pic support
+1,allow access raw datum signal strength imformation allow creation indoor location positioning use available wifi bluetooth cellular network gps data available
+1,window phone sell hot country like india browser start display indian language character
+1,smart dialer alternative build phone app app quick button goto regular phone app user want
+1,alternative write access calendar hard security reason let open appointment directly calendar app
+0,signal strength directly impact video playback experience
+0,reuse operating system component save development effort ensure look expect operating system evolf
+0,ask request clear happen
+0,window u ui app service app host locally iis express use local debug use
+0,new approach develop applicaiton simlifie ui development developer rid learn technology like java scriptangularjquerystyle sheet n number script
+0,typical problem deployment(installationupdate ui application client machine simplify process deployment like rule ui app obfuscate executable file depend reference …
+0,bonus point xaml standard compliant
+0,addition allow great prominence xaml standard great acceptance market medium
+0,require developer use background task builder background trigger activate app background
+0,control offer hour minute second selection helpful
+0,add collectionviewsource function pointer group object propertypath
+0,datepickerflyout date way bind update target source source target
+0,function fallbackvalue use x bind time parameter match exactly
+0,playback seamlessly medium
+0,control visualize editing network graph flow chart
+0,leave
+0,sense idle task suspend busy
+0,task busy work idle task suspend mean battery usage kind opposite want
+0,microsoft want build connected app project rome api
+0,15063 extend brush xamlcompositionbrushbase
+0,annoy development solution 4 target platform
+0,want drag drop file able path file store disk access use standard c++ io file access function fopen fread etc
+0,want use xaml look complicated look like reduce performance 3d heavy directx base application need performance
+0,example drag drop bmp image app compress save png image automatically folder
+0,dual screen google card glass fulfill function application attractive
+0,wanna commuicate app desktop
+0,uwp wpf application
+0,test uwp mode use dxgi_swap_effect_flip_discard result slow win32/winapi
+0,astc great good quality small size look like lot format option choose want
+0,pretty sure new treeview fall creators update dependent
+0,map unusable phone 10.0.15063 update
+0,resolvecomplet event come second
+0,line traffic layer blur jagged look bad
+0,nice look uwp ui suit create ui heavy classic application think visualstudio autocad blender lobs lot datum want use tablet phone
+0,isv uwp app feature spend time try new feature insider customer tester use got feedback
+0,currently assign binding visualstate setter resolve value binding assign target like assign bind
+0,allow design implementation change binding depend state help state binding require temporarily set x null performance handy complex screen
+0,entry add registry client access interface
+0,example let want create shorthand align control inside relativepanel fully horizontal like alignhorizontalwithpanel
+0,allows desktop app incrementally adopt ui innovation create bridge uwp app ui
+0,try converted app use ime
+0,want improve support google ime
+0,think difficult cortana pc support 13 language list https://support.microsoft.com/en-us/instantanswers/557b5e0e-0eb0-44db-87d6-5e5db6f9c5b0/cortana-s-regions-and-language
+0,verify camerastreamcorrelation sample
+0,follow stream available pc
+0,follow stream available xbox
+0,plan support skeleton tracking xbox
+0,shame new kinect driver expose kinect api exposurecontrol mark support kinect
+0,libfreenect2 library entirely possible tell kinect auto exposure
+0,expect content set directly text persist close application
+0,runtime crash compiler clearly know flag warning error
+0,xbox dev mode companion work ipv6 ...
+1,smooth update code uwp app like xaml app automatically reload shut relaunch
+0,xaml designer visual studio windows 7
+0,control allow use contact picker allow manual entry deletion contact
+0,user sense consistency file picker remember location user navigate generally start location
+0,good solution example pretend uwp app ask user select picture music file
+0,migrate app windows desktop use core audio api uwp use hopefully audiograph
+0,explore forward uwp currently way access pipeline add custom shader model like virtual earth microsoft mappoint graphics3d.graphicsengine3d microsoft mappoint rendering3d.scene step
+0,develop java application interop c kinda tricky interop shell32 api c library pretty easy straightforward jna
+0,difficult create custom richeditbox basic feature like text formatting bullets number support inking like onenote support adaptive layout work basic text editing
+0,create app use face detection
+0,mkv service server video reproduce connection onedrive lose
+0,stop way
+0,chinese italian support ask
+0,case access error occur time open file open correctly
+0,want solution
+0,change loggingchannel possibly default manifest code handle string message change 15043
+0,fwiw preview version window post anniversary update message correctly
+0,like implicit datatemplates uwp
+0,currently input plain text toast notification input type support password
+0,developer need good deep understanding ui virtualization work uwp app
+0,currently use pivot 3rd party vendor provide tabcontrol
+0,convert wpf app uwp miss report control
+1,open base class inheritance provide sample create custom virtualizing panel
+0,uwp toy customization require app deploy completely separately
+0,relevant desktop uwp app
+0,provide solution
+0,use media phone playing groove 24/7
+0,panorama control good control app user love
+0,update app uwp possible control
+0,currently way prevent menuflyout close user click item
+0,sure bug set arg cancel closing event work
+1,support transaction uwp platform windows runtime api file
+0,example quick touch stroke scroll immediately
+0,long list view bore scroll maximum scroll speed
+0,keyboard home end key scroll touch screen capability
+0,library fairly low level
+0,concept painfully evident use microsoft 's edge browser want browse favorites menu
+0,specifically excellent mouse support mean menu support hover action menus currently enjoy win32 application
+0,current situation require mouse click accomplish thing simple hover
+0,know component look like
+0,happen need control store list page element look like pivot control infinite list page element
+0,try find way excel access sql server compact edition
+0,application request secret api key need system provide secure storage
+0,release appx secret key inside key windows store server key request server application install
+0,advantage developer preview design mode
+0,idea try button sample
+0,button generate ready use visual studio project current sample
+0,animate gif disappear application minimiz restore
+0,allow user select item drag resize
+0,currently store app work desktop app cause great deal confusion
+0,need reason need improve software user
+0,developer want create custom picker like date time picker
+0,scroll point
+0,xaml page button command bar button access key set
+0,work port app calculate md5 checksum file
+0,enterprise developer advent big data believe seadragon pivotviewer binary port wpf uwp app need tool
+0,prepare custom control scrollviewer look feel nice
+0,microsoft loose huge market support net standard
+0,evidently mediacomposition saveasync api internally use storageapplicationpermission futureaccesslist api limitation 1000 item
+0,add 1000 clip create mediaclip createfromimagefileasync api fail exception
+0,item remove item add
+0,additional information maximum number item access list reach
+0,case app instal sd card notification use custom audio file default notification sound play instead custom audio file
+0,end developer use workaround simulate old behavior
+0,app list w10 simulate old behavior instead default
+0,use fm radio headphone plug
+0,reply message etc
+0,know possible moment specially hardware limitation guy work surface phone bring visual studio huge
+0,problem output port enumerate uwp api midi port define setup
+0,reaper desktop program display proper
+0,include windows.h generate compile warning extra
+0,user happy :)
+0,hololens let render 2 backbuffers(stereoscopic hard know output correct emulator frame
+0,bug uwp special character interpret letter use multi layered keyboard layout like german neo2 layout
+0,total annoyance work datum require handling lot special charecter like json xml datum
+0,look forward progress :d
+0,project rome discover device connect launch app leverage app service consent establish
+0,feature implement accessory api restrict smart watch maker
+0,allow know additional awesome feature
+0,windows display language computer set en app developer app problem solution write english
+0,functionality common music app google play store apple store blackberry world
+0,case app port uwp platform come posix linux network api bsd socket complex network communication library use support network orient functionality
+0,currently network data flow boroken app background screen switch
+0,app purchase available windows store business
+0,channel accessible current audiograph api 's
+0,support linux think windows gain support
+0,dac folder
+0,hello dev team
+0,app setting disabled swipe open swipe detection area wider user 's phone close screen edge difficult
+0,way swap style xaml rsourcedictionary file and/or piece …
+0,feedback appreciate thank john
+0,xaml app detect equivalent winrt api js app
+0,html perfectly fine windows 10 windows 10 mobile
+0,information xaml control contain complex attribute property
+0,opinion feature fundamental important new feature appear regularly
+0,accord documentation proper way handle input store app create coreindependentinputsource thread swapchainpanel createcoreindependentinputsource
+0,device touch input suffer bug come weak gpu
+0,devs chose low responsiveness low performance
+0,application exit ..
+1,api allow color pixel pointer eventually throttle async pointer capture increase expressiveness creation tool uwp application
+0,manually list easily manage dashboard status properly reflect
+0,current status ‘ progress’ app store
+0,perf counter difficult associate specific application require request queue httplistener netsh find url group id use correlation
+0,research audioframeoutputnode strange generate audioframe audio datum audioframe 's duration property 0 milisecond relativetime property
+0,example user send feedback ask windows 8.1 rt version app focus windows 10 need clear read feedback roadmap
+0,age rating questionnaire stop submit press submit
+0,example application node internal medium network line audiobus ios
+0,extrapolate capability audio allow fly add remove interconnectable reroutable audio node virtual interface device apps devices attach instead attach hardware interface
+0,video desktop window screen capture breeze naturally handle os allow creation virtual screen resource permitting course desktop expansion mirroring output video input record app usb3 dlna receiver screen
+0,allow user os detach app medium output default interface audio midi card screen window attach app device input
+0,exchange app review
+0,like ease app recommend app
+0,largely ignore past minimal find good success hammer
+0,personally 2 3 day different source email address
+0,remove support email webpage hinder user windows store app
+0,1 user lunch view sensitive document
+0,switch email app application detect active state change auto log
+0,finish food leave forget phone table
+0,point perpetrator able phone open recent app section whatev client look
+0,2 user desktop observe file app inactive minimiz
+0,begin timer auto log
+0,perpetrator able hover taskbar item screen draw user log
+0,sorry sound bitter frustrating develop w10 mobile moment good review chance display store slim version fragmentation
+0,understand insider review slow ring remove bad delete permanently developer dashboard
+0,people time write thoughtful review simply delete
+0,start continually download review report record
+0,4 star review simply disappear
+0,point insider bring rating app os blame .... people rat people fast insider ring extremely hard review
+0,old windows phone 8.1 retain status highly rat
+0,point rule mean review point people post review
+0,sure good solution cold allow 3 review fast insider guess skew review positively
+0,let text review stand rating count
+0,accurately impression app review feasible
+0,caller require permission perform operation
+0,iot introduce windows system processlauncher start arbitrary program like process start .net
+0,note execute dns client service crash
+0,comment textattributes line note service crash
+0,bind ispaneopen splitview property viewmodel
+0,work nicely splitview overlay mode user press hardware button phone
+0,case splitviewpane close expect seemingly overwrite binding ispaneopen instead set directly value false
+0,effect panel open code set vm property true binding lose
+0,practical term force ui technology diversion implement new functionality
+0,xaml look tempting option useful mobile web need control usually implement javascript
+0,application architectural level port winforms html js favour entirely new application follow understood accept architectural pattern implement old functionality
+0,imagine app question write ex employee 2008 vb.net deep domain knowledge targeting user similar domain knowledge specialist task design documentation description manual process replace
+0,norm ... wrong 's
+0,budget assign place use 10 people busy
+0,architectural barrier killler believe feature gdi+ express html
+0,ui adhere good gui design principal performance suck probably
+0,user start look act arcane control
+0,architecture modern html5 appliication common gdi+ windows message loop xaml
+0,thing like redux essentially way like message loop avoid race condition async operation
+0,microsoft believe solve massive developer stumble block allow winforms control potentially integrate html ui 's
+0,imagine app question write …
+0,microsoft finally develop library able handle nfc device
+0,unfortunately library able ndef message uid card
+0,reason uid save proximity device nfc card read
+0,similar property uwp 's api
+0,reproduce mobile build 14393 system
+0,currently way attach debugger run process attach process mobile
+0,bad bug like deadlock happen
+0,real pain investigate usually happen debugger release build
+0,windows 10 mobile like box access
+0,frankly speak surprised beginning
+0,happen real user attendance trigger useless
+0,wm5/6 unattended power state situation way detect real user interaction device
+0,current behavior systemtrigger useraway userpresent unexpected
+0,phone sleep screen turn
+0,event occur sms incoming toast
+0,usernotificationchangedtrigger fire
+0,userpresent trigger fire
+0,short timeout screen
+0,personal favourite mobile file open picker app suspend debug
+0,sort surprise happen complex app
+0,uwp currentculture reflect regional settings format currentuiculture reflect display language
+0,shouln't relly workaround like https://www.pedrolamas.com/2015/11/02/cultureinfo-changes-in-uwp/
+0,lot like facebook messenger 's chat head
+0,thing
+0,find phonetriggertype enum include useful trigger trigger receive
+0,torch api work lumia window phone 8.1 support lumia 830640 ...
+0,currently uwp readable grayscale font smoothing
+0,uwp app look bad desktop app standard dpi screen
+0,compass getdefault return null compass stop work app
+0,solve need restart phone
+0,following msdn magazine article mention limit voice command deffiniton file
+0,use windows sapi intensively application build grammar easily big limit impose cortana
+0,bit tricky port recognition engine application away sapi cortana sapi provide powerful capability large set command
+0,unfortunately know uri cookie track single domain visit currently
+0,clear cookies
+0,api 5 minute write save lot coding
+0,secondary deleteallcookie clearcookies api reason need think use case retrieve cookie
+0,happy way
+0,user interaction depend
+0,search windows 10 success
+0,similar accomplish pre
+0,use win ce ms grant access source code
+0,pedestrianfeaturesvisible toggle mapstyle set road
+0,currently use controlchanneltrigger httpclient send https request application terminate system
+0,test use https surprise work debugger attach exception throw implement
+0,termination occur application connect debugger
+0,audiograph create custom desiredsamplesperquantum ignore use default 10ms quantum
+0,depend hardware hear gap right start need load cpu additional work like scroll ui run work background thread
+0,guess result extremely short quantum size 10ms switch thread time low buffer length 2 quant synchronization issue
+0,slider render extreme right value 100 instead zero
+0,app use custom title bar extend view title bar area
+0,use code like allow custom element support dragging window
+0,implement pre anniversary update
+0,work fine bug introduce anniversary update title bar return zero height systemoverlayrightinset systemoverlayleftinset
+0,confirm pre anniversary update property return value like 32 height 188 systemoverlayrightinset
+0,use file type filter sense pick folder menion documentation
+0,suppose app mode like zune normal mini
+0,mini mode app present indispensable small element window
+0,know maybe microsoft 's priority list believe available
+0,nice
+0,like build universal windows app
+0,moment possible install application install directory file alter application
+0,application copy file application datum folder installation work delete original file installation folder version
+0,anniversary update store default rating current version
+0,annoying developer good populair app
+0,potential user view store likely judgement download base number review quality review especially window store total number download
+0,app publisher reason app update absolute minimum order rating possible
+0,30 day
+0,want know custom title bar look exactly defult control
+0,able systemaccentbrush actual window title bar 's color becouse depend accent color setting
+0,ask forum find detailed description issue
+0,mi classify direction
+0,p.s know post library windows medium ocr namespace medium
+0,use resource datatemplate work fine
+0,upgrade anniversary instal new sdk tools new visual studio update work expect
+0,crash instantiation viewmodel object null bindings update definitely case previous version surely expected behavior
+0,replace x bind bind run use datatemplate multiple object example gridview resource value instance pointless
+0,app poor startup perf ngen
+0,store app standard background ngen work wpf app
+0,like recent change dev center
+0,cumulative acquisition specify time hard compare app people like app available long course cumulative acquisition high
+0,able app time frustrating
+0,currently sample
+0,simple clickonce publishing
+0,want convert msi
+0,right new devcenter offer ability sort app included markets base price modify
+0,definition serialdevice
+0,order break code 's dependency actual hardware automate test reinvent wheel
+0,interface internal force create interface create wrapper serialdevice implement
+0,lot code write interface exist
+0,application open office document programmatically background link appear quick access area file explorer
+0,good thing need share user
+0,enable custom provider realtime etw trace page windows device portal detail timestamp event
+0,use perfview work great event detail payload keyword level etc
+0,hop use portal realtime monitoring appear work correctly
+1,allow developer create custom keyboard
+1,immediate approval possible app publish immediately available
+0,windows app store category tremendous potential interact request conent consumer content provider lack interaction exciting
+0,work ... header group display
+1,phone accurate location simply return
+0,friend create app win windows hackathon hold microsoft cyprus
+0,far tell combination splitview pane pivot problem
+0,submit word game apple app store
+0,neglect suggestion copy
+0,way pay 3g/4 g wifi network cable etc
+0,method remove attendee crash
+0,send mail
+1,option sdk installer tools
+0,currently possible try add custom header content use code
+1,available developer kenya
+1,consider security issue uwp application feel address
+0,good regard leo
+0,sure relevance
+0,work location base app
+0,use mapicon user current location
+0,want allow user drag mapicon event
+0,create login page find place focus user field header textbox add additional box field indicate focus
+0,password box field focus occur
+0,webview lack support manipulation event act huge gesture eater let parent control like scrollviewer flipview control gesture like scroll swipe etc
+0,impossible use webview xaml element view
+0,selectionmode listview hard know item focus
+0,set item focus hard
+0,good way let know :)
+0,way find feel bit clumsy
+0,work check device family
+0,modern winrt network api base streamsocket correspond streamsocketcontrol provide option enable tcp timestamp support
+0,future proof
+0,yes know c++ developer use traditional winsock api setsockopt need tie old self manage thread model pleasing
+0,rfc7323 tell story great detail
+0,app store live tile clock
+0,check multiple clock tile app store fundamental issue
+0,blank app logo tile tile notification refresh
+0,like htc ship windows phones
+1,effort minimize overhead system setting allow select clock app run
+0,right create isolated environment fail installer
+0,able run converter build 14316 14352
+0,build 14383 error
+0,clean un install app level reset
+0,people launch app file want strong experience people find file let file type association work
+0,fta 's mean user changeable
+0,currently request server check certificate extract public key verify ok
+0,currently access handshake httpclient ssl pinning verification
+0,scratch head wonder enable verbose msbuild output
+0,specify layoutfile appxpackagefilelist miss file copy skip output occur
+0,vsdproj extension immediately load value project property window packagelayout text box change configuration current value
+0,web view support ms appdata:///local uri rendr image web page host instal location
+0,gatt notification arrive sensor
+0,30 second
+0,want tag location gps long lock
+0,virtually impossible tell pay pay app iaps
+0,reserve update daily actual number pay
+1,example 800 reserve need way know expect 500 pay rest hold
+0,uwp provide couple option access file folder
+0,unfortunately access guarantee storagefile storagefolder
+0,hard port exist code intensively use api
+0,right attempt use win32 stdio result permission deny total nonsense basically ok api option dare try use classical
+0,possible continuous deployment process platform
+0,public reason window dev platform good
+0,currently customize titlebar background foreground border
+0,storagefile like launch explorer display file
+0,need access file 's storagefold pass launchfolderasync
+0,use raspberry pi nxp nfc modul 7120
+0,card standard possible
+0,company public services use encrypted card use key read datum card id confidential datum
+0,server cloud backend product
+0,costumer run different version backend software
+0,sole purpose use sfb limit app user install
+0,actually list instal app useless terrible app time
+0,xaml support ink user handwrite directly textbox use ink convert automatically text
+0,demo'd app build 2016 event london
+0,actually initially construct msi place folder document folder centennial install vfs\ ....
+0,hard user find kind folder
+0,add screenshot
+0,install android app
+0,promotional code allow owner pay aplication store 0
+0,discount code important marketing wich overlook store
+0,currently app developer submit update exsit lob app update bypass business store app automaticallyupdat
+0,enterprise control updated app deploy user i.e conflict update etc
+1,support hybrid html5 cordova ... application windows mobile
+0,rdlc report viewer report designer winform app easy way job
+0,deploy sample code phone(arm).it throw exception
+0,sample code onedrive
+0,thread msdn form
+0,try open file file type association link filetype file access open file app scenario
+0,way grant file folder permission folder picker default folder parameter
+0,terrible app
+0,currently possible use winium possible use winappdriver
+0,file explorer device portal let look .dat file localsettings roamedsettings store way edit
+0,ssml fully support
+0,user occasionally experience freeze current high datum volume c .net app believe garbage collection
+0,c++ mean drop productivity developer
+1,temperature datum device portal
+0,user expect window maximize
+0,sense phone tablet mode desktop dedicated use device limitation
+0,iot support single app affect windows 10 mobile
+0,issue like hard use uwp business use case
+0,uwp win32 basic requirement
+0,try build solution base windows mobile run single assigned access app
+0,use fiddler desktop view network traffic
+0,run converter powershell finish work report problem
+0,work run state complete log
+0,attempt choose recent compatible version
+0,instrument implement api soap linux present wcf service
+1,unfortunately create uwp app support custom wcf bind need talk instrument
+0,love
+0,centennial cmd line argument ...
+0,appx shortcut support command line argument
+0,sure right place makeappx commando like .rels'-xml file add vs15 setup
+0,run multiple time yout find reason crash errors time .rels file
+1,like user right review developer able respond review submit store
+1,user plan opt response developer email user response allow response publicly visible
+0,needless current implementation exploit submit false review allow developer respond
+0,application insight mobile discontinue soon dev center analytic break
+0,actually exception throw uwp api painfully awful
+0,stacktrace error occur approximative vague exception
+0,understand unnecessary javascript winrt insanely complex design ... ...
+0,exception reason ... error occur message
+0,cordova plugin admob windows phone 8 plugin adcontrol specific mediation cordova
+0,admob release windows phone 10 support roadmap
+0,smaato support w10 plugin develop
+0,help bring app windows phone windows universal platform
+0,system diagnostic process start(path path point folder html file txt file etc result
+0,solution find use startinfo explorer.exe filename path argument
+0,soemth wrong late build currently workong 14322.1000 pick file folder app crash
+0,return second remain inresponsive
+0,evertying work right build user report problem
+0,debug click suspend app vs hang phone likely restart
+0,today handler newwindowrequest create new window way handle window.close javascript example
+0,uwp single page app webview control
+0,app activate webview control focus receive correspond event content webview eg html focus document.hasfocus remain false
+0,user click html document.hasfocus true webview receive lostfocus event
+0,expected behaviour webview focus sync document.hasfocus
+0,base image run sort firstrun setup everytime centennial installation execute
+1,good firstrun setup apply base setup
+1,print function uwp webview control
+0,problem :1 mediaplayer class play audio delay 1 2s
+0,2 audio file length 1 2 play
+0,research decompile app find use mediaplayer class play audio filethen write demo problem occur
+0,evidence prove
+0,great appreciate help vote microsoft aware fix itit important learn english look vocabulary frequently daily life
+0,thank
+0,currently use codedui testing framework allow logon ie different user password
+0,site test use windows authentication asp.net impersonation run intranet
+0,use basic authentication pass credential url
+0,mean force use codedui framework
+0,windows app store category tremendous potential interact request
+0,scenario red integral identity
+0,user ask transparent tile include primary tile
+0,leave bad place sacrifice branding provide require functionality
+1,propose solution independent color setting store specific branding
+0,currently support unicode
+0,simple test code use korean language
+0,exception raise
+0,look .appx new installation mechanism saner version app installation application allow good
+0,example interactive screen sharing app
+0,far know possible centennial exist today kind app valuable
+0,centennial big step like
+0,12 month
+0,style target fonticon control setter fontfamily
+0,open source platform ionic market place think great
+0,exist couple uwp library purpose beautifully design app implement material design principle framework
+0,uielement clip accept rectanglegeometry uwp application
+0,uwp app splash screen transparent background color declare app manifest desktop render accent color phone render background color
+0,belong india want register self microsoft developer
+0,need pay life time registration fee
+0,try pay fee option payment credit card
+0,option
+0,credit card unable payment
+0,thing credit card minor reason unable payment
+0,game release steam valve promote game free display 1 mln user
+0,earlier option cumulative download app way total number app download till date
+0,report specially know user update specific version app
+0,computer need tool phone deployment winappdeploycmd
+0,code machine need tool
+0,copy tool separately 106 mb
+0,work fine header library instal
+0,feature usefull message app
+0,right place report bug microsoft
+0,need bug report new ideas
+0,administrator list bug consider exist security issue exploit present feel free categorize fit
+0,malicious party use url location like control webauthenticationbroker authenticate phish credential user process user understand url process load content authentication workflow validate authenticity
+0,context step understand use exploit process
+0,creativity come
+1,work pass user real sign page good simply set cookie user 's session ok
+0,9 rule planet earth new find power ok :)
+0,reference base thread start msdn forum additional information
+0,thank consideration
+1,add developer revenue iap price info response allow developer receive accurate datum income request period
+0,sid group user
+0,company want control access user active directory
+0,enterprise application use information user access
+0,help
+0,isv live united states
+0,want set app price dev center offer dolloar base price
+0,previous version dev center able set local currency
+0,degrade
+0,usd familiar
+0,use different local currency basically
+0,conversion list usd local currency
+0,microsoft change conversion rate foreign exchange conversion rate
+0,hard find expect price local currency
+0,conversion rate constant hard find expect price
+0,certificate user storage app storage issuer subject different eku field
+0,certificate user storage filter interested
+0,need check instal function check return false end instal new time
+0,duplicate list
+0,today ui designer work parse node
+0,currently rate review user submit win10 insider preview disable later
+0,devs respond review delete
+0,ridiculous behavior user devs
+0,ms disable rate review send win10 ip disallow user rate review
+0,improvements windows store app game visibility
+0,currently possible export app download statistic automatically api windows dev center
+0,currently microsoft specific support beacon
+0,beacon generation ruler market
+0,window developer good future window
+0,contact manufacturer beacon basically hesitate support window limitation window featurest
+0,don;t separate library beacon
+0,beacon consider normal bluetooth device
+0,currently read limitation communicate
+0,big drawback
+0,expect solve window 10
+0,till client company leave window ios android
+0,continue window face huge drawback
+0,raise question relate community forum
+0,input
+0,sure guy look quickly
+0,look sure priority
+0,windows wing currently cut area
+0,wpf use texture pattern app background tilebrush class
+0,imagebrush inherit tilebrush miss property tile
+0,window form easy user print dialog code printer output use specific paper bin
+0,functionality miss uwp
+0,application user print check share check printer check stock tray 4
+0,700 user 52 site work fine vb6 16 year
+0,want upgrade application modern environment find uwp wpf hard leave winforms
+0,right register forever
+0,example pro extension stand usually good version app developer
+0,use mislead
+0,work multinational company
+0,accent color change
+0,currently windows blog comment system suffer myriad problem
+0,conversely disqus follow benefit
+0,blog post create discuss issue length read
+0,thank consideration dialogue idea
+0,ridiculous
+0,importantly developer need
+0,know hoop jump app simply photo network location ...
+0,crazy basic functionality currently support device planet support window phone
+0,important fact support uwp app run desktop laptop tablet
+0,file picker phone miss universal functionality ...
+0,difficulty test app purchase successful microsoft 's server app receive success message
+0,private test app use real money test iap
+0,hard test cost test perform
+1,prefer able test iap time attempt refund thousand dollar
+0,currently possible test use currentappsimulator
+0,apple google provide sandbox environment iap cost real money
+0,parent application store file app space
+0,wish open file launcher ask choose target application
+0,myapp file abc.pdf
+0,open file abc.pdf myapp launcher provide list application open file
+0,assume choose pdf reader want myapp know pdf reader close stop access file i.e abc.pdf
+0,code analysis warn expose properlty uri use string type ignore fair warning feel
+1,like system uri support natively runtime binding like
+0,note conversion str break throw exception bind string null string non valid uri throw
+0,pin system treat biometric device
+0,documentation indicate
+1,userconsentverifier treat pin biometric device
+0,right display online web page windows 10 webview hsts security feature work
+0,webview allow script source load page load https
+0,page test hsts mixed content
+0,need support io actual app lot problem
+0,like angularjs style
+0,old verbose
+0,unfortunately glyph activity display tile
+0,use glyph alarm alert attention properly display
+0,thank good regard
+0,migrate application windows 8.1 windows 10
+0,problem encountr winrt enable add service reference wcf uwp implement
+0,currently mixture tax collect ms pay developer
+0,small business huge effort theoretically possible
+0,far inform competition apple app store google play aswell
+0,ms use collect tax nowadays
+0,look old feature request quote old developer agreement
+0,state current member country european union include e.g.
+0,nowadays jan 13th 2016 dev agreements list austria country developer collect tax
+0,austria price select final sale price include applicable tax
+0,need app title bar background accent color
+0,windows 10 mobile mobile connection getsignalbar mobile connection return 5 bar display system value
+0,work wifi connection type connection windows 8.1
+0,bug change w10
+0,maxpath severe headache lately
+0,try compile stuff compiler necessarily create process enormous argument
+0,fine maxpath short let succeed
+0,reason switch linux position change maxpath rewrite way compiler process
+0,microsoft help
+0,generate binding code large easy follow
+0,exist compilation visible user vs
+1,need timeout read streamsocket like old .net socket serialport
+0,destroy complete connection device bluetooth serial connection respond
+0,sense
+0,wrong connection serial device respond
+0,javascript provide history api manipulation certain aspect browse history
+0,example history.replacestate replace url current website browse history
+0,possible detect change webview inject javascript replace funtion
+0,solution hacky lot work
+0,90 app find store
+0,40 app 8 visible
+0,click developer app
+0,deep link yes find app download find keyword app
+0,issue windows stores
+0,version windows app
+0,actually app appear disappear day later
+0,unacceptable strong deterrent create app windows
+0,phone 8.1 phone 10 windows 8 8.1 windows 10
+0,browser deployment excellent feature silverlight
+0,organization allow store app inconvenient deploy app app store reason
+0,firstly deployment app store require rigorous testing etc microsoft app user general public
+0,secondly version application deploy different customer
+1,read email access locally important create professional amazing app uwp app allow achieve
+0,need set code
+0,http request include post request(url body
+0,android ios
+0,change fullscreen position window wrong influence right
+0,find read property system comment file work windows 10
+0,use storagefile property getdocumentpropertiesasync read property file comment documentproperties comment string
+0,problem happen window explorer set new comment apply file read
+0,currently windows os decide good internet connection use automatically connection like wifi network cable
+0,uwp lag feature regular ado connect db
+0,use ef6/7 provide direct access sqllite regular db
+1,ms shall change ef7 allow db connectivity batch datum return like 50/100 return record time instead select return entire db table datum shot
+0,appear enter file select exist file use filesavepicker uwp mobile
+0,work expect desktop
+0,original question msdn forum
+0,winjs design prior es6
+0,capability provide es6 classs provide winjs
+0,edge browser vs 2015 vs code provide support es6
+0,unfortunately bug infest lack fundamental feature expect graphical debug tool 2015
+1,solution open source windbg related tool dbghlp windbg extension etc allow community fix improve small team microsoft manage
+0,moment impractical developer ask boss microsoft account create app package
+0,post 1st application window store 9 keyword
+0,eg publisher application word partial word
+0,app know totaly new clear situation
+0,scenario user save file app close directory delete rename time dlg save file
+0,currently difficult thing
+0,nesting uicontainers inside richtextblock add border element need ruin alignment text
+0,inexplicably uwp include wpf wrappanel introduce nearly 10 year ago
+0,panel uwp similar like wrapgrid work item variable size
+0,simple example wrappanel essential display tag cloud
+0,appear way deploy app windows 10 emulator outside manually visual studio
+0,mean wrap tooling launch install build app emulator
+0,oddly windows 8.1 tooling instal windows 10 sdk actually list windows 10 emulator list appdeploycmd output need post filtering separate 8.1 10 emulator
+0,currently use 8.1 tooling list emulator try deploy start app deployment fail
+0,today open windows dev account payout report find advertising purchased app separate
+0,happen
+0,develop app bizview google analytics client feature official google analytics app android store
+0,question bizview app question developer work hard
+0,diagnosis find issue cause api handle pdf file encrypt aes 256 encryption later acrobat version use
+0,drag drop file folder universal apps read attribute set impossible edit file folder
+0,drag drop conscious user interaction like picker happen knowledge
+0,api support configuration window background colour
+0,mean like groove music app use non white background noticable section white appear window drag new size
+0,link sway explain suggestion better
+0,sincerely hope difference
+0,unfortunately smartcard class smartcardprovision class related class provide means retrieve friendly later
+1,allow party apps manipulate dom element
+0,look return value ...
+0,windows system power energysaverstatus
+0,regardless threshold set energy saver setting
+0,look like bug
+0,use lumia 620 device windows 10 mobile build 10586.11
+0,look
+1,frustrate devoloper app is'nt category app find direct search
+0,release version app find number new user number exist user upgrade new app version dev center
+0,hope set app price 0.2
+0,currently way schedule recur notification use scheduledtoastnotification
+0,simply elegant solution ...
+0,win32 mac linux api 's uwp
+0,text editor unsaved change standard behavior ask user close
+0,possible uwp
+0,today run problem combobox control
+0,issue easily reproduce
+0,row column
+0,leave column space possible place combobox right column
+0,populate combobox item run app
+0,maximize window open combobox popup selection menu minimize popup middle window
+0,showat flyout size width define style
+0,showatasync flyout element pass parameter ignore style
+0,think bug
+1,prefer return boolean enum fail reason
+0,probably location outside camera frustum ...
+0,currently test return point inside rect size map actualwidth map actualheight
+0,point outside divide result rawpixelsperviewpixel
+0,point location near right corner map inside map offset 3190
+0,location slightly right return point 4810 instead 3210 divide factor 1.5 lumia 635
+0,setting page
+0,app work background
+0,download break app switch
+0,currently publisher choose signup publisher derive
+0,publisher use app package app localstorage folder
+0,careless signup stuck change publisher naming package
+0,super fast home button shortcut
+0,press key 2 locked screen 2 second phone profile change etc .... run application
+0,assign run application button locked screen ...
+0,assign run application screen region locked screen ...
+0,home automation huge market windows device
+0,big piece able monitor control ip cameras foscam hd camera
+0,right inspect server certificate request use requestmessage transportinformation
+0,unfortunately application wide certificate service website app include
+0,like problem popup overlap application bar
+0,strange open appbar partially cover
+0,observe bot desktop mobile uwp app
+0,description sample code find http://stackoverflow.com/q/33321971/2681948
+0,app choice 18 submit audit report feedback 18 audit failure
+0,example app allow user select time i.e tomorrow 1030
+0,user choose run everyday week etc
+0,feature available android hear iphone
+0,code set know header code result exception misused header
+0,company thousand use sketch develop app interface developer
+0,currently way display webview https web page invalid certificate user specific opt
+0,currently provision employee cod publish app easily know revenue earn
+0,earn chance leave start publish app
+0,apple google allow create user account release manager role access sale revenue report
+0,windows 10 mobile party app act caller id app intercept set phonecallorigin
+0,app access phonecallorigin phonecallhistoryentry
+0,develop coded ui test localized uwp app test dependent text localize
+0,control easily handle automationid corewindow messagebox incl button set automationid ’s coded ui test use title find element
+0,app phone desktop
+0,create universal app
+0,tab version small number user need upload new universal package phone version app
+0,problem app automatically reserve tab version package
+0,able associate application phone build store(because app reserve package package store
+0,resolve issue change phone build
+0,template button different rendering
+0,strange difference especially grids example crazy
+0,tell want detail mismatch
+0,develop application target windows phone 8.0
+0,xap deploy win10 mobile device strange bug
+0,instal app uninstall deploy application 's data stay remove unstall app
+0,retarget app windows pone 8.1 problem disappear
+0,barcode generate generate code image
+0,enter encode image mention decoder decode correctly
+0,enter encode image mention decoder decode …
+0,remote desktop services object windows store app longer available use windows 10 windows server 2016 technical preview
+0,negative review bad especially user rat old version app turn new user
+0,windows phone 8.0 silverlight time able content cameraroll faster medialibrary 1 second file
+0,extremely slow uap
+0,silverlight possible register app option edit picker photo hub https://msdn.microsoft.com/en-us/library/windows/apps/jj662932(v=vs.105).aspx
+0,possbile uap app
+0,option present desktop variant app miss mobile app
+0,equivalent winrt api messagedialog provide apparent mean copy message clipboard response right click response ctrl+c.
+0,thank attention
+0,win8 app store
+0,want beta test win10 version
+0,set app hide stop sell
+0,submit win10 version promo code
+0,watch app analytic far device win10 app intend update push regardless listing setting
+0,professional developer redesign company love word formal business invoice
+0,microsoft send money company business partner example outsource center use credit card payment
+0,like
+0,input node
+0,appreciated
+0,app search 10 app pop app
+0,chat support tell generic
