@@ -27,7 +27,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.6B.100d', 
+                 vectors = 'glove.840B.300d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -102,13 +102,13 @@ class CNN(nn.Module):
         return self.fc1(cat_relu)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 300
 N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
 FILTER_SIZES = [2,3]
 OUTPUT_DIM = 1
-DROPOUT = 0.7
+DROPOUT = 0.6
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX,Dropout_2)
