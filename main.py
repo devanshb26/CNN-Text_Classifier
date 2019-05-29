@@ -85,8 +85,8 @@ class CNN(nn.Module):
         conved = [F.relu(conv(embedded)).squeeze(3) for conv in self.convs]
             
         #conved_n = [batch size, n_filters, sent len - filter_sizes[n] + 1]
-                
-        pooled = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in conved]
+        print(conv.shape[2]+"   "+conv.shape[1] for conv in conved)        
+        pooled = [F.max_pool1d(conv, conv.shape[1]).squeeze(2) for conv in conved]
         
         #pooled_n = [batch size, n_filters]
         
