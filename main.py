@@ -8,15 +8,15 @@ import numpy as np
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
-fields = [(None, None), ('text', TEXT),('label', LABEL)]
+fields = [('label', LABEL),('text', TEXT)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_EvaluationData_labeled.csv',
-#                                         train = 'train.tsv',
-#                                         validation = 'valid.tsv',
-#                                         test = 'test.tsv',
+#                                         train = 'V1.4_Training.csv',
+#                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
+#                                         test = 'SubtaskA_EvaluationData_labeled.csv',
+                                        train = 'train_spacy.csv',
+                                        validation = 'valid_spacy.csv',
+                                        test = 'test_spacy.csv',
 #                                         #sort_key=lambda x: len(x.Text),
                                         format = 'csv',
                                         fields = fields,
