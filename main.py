@@ -60,10 +60,11 @@ class CNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc = nn.Linear(len(filter_sizes) * n_filters, output_dim)
-#         self.fc2 = nn.Linear(hidden_dim, output_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+        self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
+        self.dropout_2=nn.Dropout(Dropout_2)
         
     def forward(self, text):
         
@@ -92,10 +93,10 @@ class CNN(nn.Module):
         cat = self.dropout(torch.cat(pooled, dim = 1))
 
         #cat = [batch size, n_filters * len(filter_sizes)]
-#         f=self.fc1(cat)
-        
-#         return self.fc2(f)
-        return self.fc(cat)
+        f1=self.fc1(cat)
+        d=self.dropout_2(f1)
+        return self.fc2(f)
+#         return self.fc(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
