@@ -56,11 +56,11 @@ class CNN(nn.Module):
         self.convs = nn.ModuleList([
                                     nn.Conv2d(in_channels = 1, 
                                               out_channels = n_filters, 
-                                              kernel_size = (fs, embed_dim)) 
+                                              kernel_size = (fs, embedding_dim)) 
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, hidden_dim)
         self.relu=nn.Relu()
         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
@@ -103,7 +103,7 @@ class CNN(nn.Module):
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
 N_FILTERS = 250
-HIDDEN_DIM=250
+HIDDEN_DIM=20
 Dropout_2=0.75
 FILTER_SIZES = [1]
 OUTPUT_DIM = 1
