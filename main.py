@@ -56,7 +56,7 @@ class CNN(nn.Module):
         self.convs = nn.ModuleList([
                                     nn.Conv2d(in_channels = 1, 
                                               out_channels = n_filters, 
-                                              kernel_size = (fs, embedding_dim)) 
+                                              kernel_size = (fs, 5)) 
                                     for fs in filter_sizes
                                     ])
         
@@ -103,7 +103,7 @@ EMBEDDING_DIM = 100
 N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3]
+FILTER_SIZES = [1]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
