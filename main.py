@@ -101,7 +101,7 @@ class CNN(nn.Module):
 #         return self.fc(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 300
 N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
