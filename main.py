@@ -13,7 +13,7 @@ train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test.csv',
+                                        test = 'SubtaskA_Trial_Test - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -27,7 +27,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.6B.100d', 
+                 vectors = 'glove.840B.300d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -102,8 +102,8 @@ class CNN(nn.Module):
         return self.fc1(cat_relu)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
-N_FILTERS = 250
+EMBEDDING_DIM = 300
+N_FILTERS = 150
 HIDDEN_DIM=250
 Dropout_2=0.75
 FILTER_SIZES = [2,3]
