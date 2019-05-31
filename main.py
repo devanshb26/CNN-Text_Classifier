@@ -154,9 +154,10 @@ def binary_accuracy(preds, y):
     correct = (rounded_preds == y).float() #convert into float for division
     #print(len((y.data).cpu().numpy()))
     f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
-    
+    y_mini=(y.data).cpu().numpy()
+    pred_mini=(y.data).cpu().numpy()
     acc = correct.sum() / len(correct)
-    return acc,f1
+    return acc,f1,y_mini,pred_mini
   
   
 def train(model, iterator, optimizer, criterion):
@@ -164,6 +165,7 @@ def train(model, iterator, optimizer, criterion):
   epoch_loss = 0
   epoch_acc = 0
   epoch_f1=0
+ 
   model.train()
 
   for batch in iterator:
@@ -174,7 +176,7 @@ def train(model, iterator, optimizer, criterion):
 
       loss = criterion(predictions, batch.label)
 
-      acc,f1 = binary_accuracy(predictions, batch.label)
+      acc,f1,y_mini,pred_mini= binary_accuracy(predictions, batch.label)
       #print(type(f1))
       loss.backward()
 
@@ -192,6 +194,8 @@ def evaluate(model, iterator, criterion):
   epoch_loss = 0
   epoch_acc = 0
   epoch_f1=0
+  y_tot=np.array([])
+  pred_tot=np.array([])
   model.eval()
 
   with torch.no_grad():
@@ -202,12 +206,16 @@ def evaluate(model, iterator, criterion):
 
           loss = criterion(predictions, batch.label)
 
-          acc,f1 = binary_accuracy(predictions, batch.label)
+          acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
 
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
-  return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
+          y_tot+=y_mini
+          pred_tot+=pred_mini
+  f1=f1_score(y_tot,pred_tot,average='binary')
+  f1_macro=f1_score(y_tot,pred_tot,average='macro')
+  return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
 
 
 
@@ -227,7 +235,7 @@ for epoch in range(N_EPOCHS):
   start_time = time.time()
 
   train_loss, train_acc,train_f1 = train(model, train_iterator, optimizer, criterion)
-  valid_loss, valid_acc,valid_f1 = evaluate(model, valid_iterator, criterion)
+  valid_loss, valid_acc,valid_f1,f1,f1_macro = evaluate(model, valid_iterator, criterion)
 
   end_time = time.time()
 
@@ -245,9 +253,11 @@ for epoch in range(N_EPOCHS):
 
   model.load_state_dict(torch.load('tut4-model.pt'))
 
-test_loss, test_acc,test_f1 = evaluate(model, test_iterator, criterion)
+test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
 
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin : {f1:.4f}')
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac : {f1_macro:.4f}')
 
 
 import spacy
