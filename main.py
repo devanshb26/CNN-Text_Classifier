@@ -27,7 +27,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -102,7 +102,7 @@ class CNN(nn.Module):
         return self.fc1(cat_relu)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 N_FILTERS = 150
 HIDDEN_DIM=250
 Dropout_2=0.75
@@ -211,8 +211,8 @@ def evaluate(model, iterator, criterion):
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
-          y_tot+=y_mini
-          pred_tot+=pred_mini
+          y_tot=np.concatenate([y_tot,y_mini])
+          pred_tot=np.concatenate([pred_tot,pred_mini])
   f1=f1_score(y_tot,pred_tot,average='binary')
   f1_macro=f1_score(y_tot,pred_tot,average='macro')
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
