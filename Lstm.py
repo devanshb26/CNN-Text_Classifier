@@ -313,9 +313,9 @@ def evaluate(model, iterator, criterion):
         for batch in iterator:
 
             text, text_lengths = batch.text
-            print(2019)
-            predictions = model(text, text_lengths).squeeze(1)
             
+            predictions = model(text, text_lengths).squeeze(1)
+            print(2019)
             loss = criterion(predictions, batch.label)
             
             acc = binary_accuracy(predictions, batch.label)
