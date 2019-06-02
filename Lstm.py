@@ -301,29 +301,29 @@ def train(model, iterator, optimizer, criterion):
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
   
   
-def evaluate(model, iterator, criterion):
+# def evaluate(model, iterator, criterion):
     
-    epoch_loss = 0
-    epoch_acc = 0
+#     epoch_loss = 0
+#     epoch_acc = 0
     
-    model.eval()
+#     model.eval()
     
-    with torch.no_grad():
+#     with torch.no_grad():
     
-        for batch in iterator:
+#         for batch in iterator:
 
-            text, text_lengths = batch.text
+#             text, text_lengths = batch.text
             
-            predictions = model(text, text_lengths).squeeze(1)
+#             predictions = model(text, text_lengths).squeeze(1)
             
-            loss = criterion(predictions, batch.label)
+#             loss = criterion(predictions, batch.label)
             
-            acc = binary_accuracy(predictions, batch.label)
+#             acc = binary_accuracy(predictions, batch.label)
 
-            epoch_loss += loss.item()
-            epoch_acc += acc.item()
+#             epoch_loss += loss.item()
+#             epoch_acc += acc.item()
         
-    return epoch_loss / len(iterator), epoch_acc / len(iterator)
+#     return epoch_loss / len(iterator), epoch_acc / len(iterator)
   
   
   
@@ -344,22 +344,22 @@ for epoch in range(N_EPOCHS):
     start_time = time.time()
     
     train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
-    valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+#     valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
     
     end_time = time.time()
 
     epoch_mins, epoch_secs = epoch_time(start_time, end_time)
     
-    if valid_loss < best_valid_loss:
-        best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'tut2-model.pt')
+#     if valid_loss < best_valid_loss:
+#         best_valid_loss = valid_loss
+#         torch.save(model.state_dict(), 'tut2-model.pt')
     
     print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
+#     print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
     
-model.load_state_dict(torch.load('tut2-model.pt'))
+# model.load_state_dict(torch.load('tut2-model.pt'))
 
-test_loss, test_acc = evaluate(model, test_iterator, criterion)
+# test_loss, test_acc = evaluate(model, test_iterator, criterion)
 
-print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
+# print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
