@@ -315,11 +315,11 @@ def evaluate(model, iterator, criterion):
             text, text_lengths = batch.text
             
             predictions = model(text, text_lengths).squeeze(1)
-            print(2019)
+            print(text_lengths)
             loss = criterion(predictions, batch.label)
             
             acc = binary_accuracy(predictions, batch.label)
-            print(209)
+            print(acc.item())
             epoch_loss += loss.item()
             epoch_acc += acc.item()
         
