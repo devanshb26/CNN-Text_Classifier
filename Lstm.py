@@ -173,7 +173,7 @@ def train(model, iterator, optimizer, criterion):
 
       optimizer.zero_grad()
 #       print(batch)
-      predictions = model(batch.text,text_lengths).squeeze(1)
+      predictions = model(batch.text,batch.text_lengths).squeeze(1)
 
       loss = criterion(predictions, batch.label)
 
@@ -202,7 +202,7 @@ def evaluate(model, iterator, criterion):
 
       for batch in iterator:
 
-          predictions = model(batch.text,text_lengths).squeeze(1)
+          predictions = model(batch.text,batch.text_lengths).squeeze(1)
 
           loss = criterion(predictions, batch.label)
 
