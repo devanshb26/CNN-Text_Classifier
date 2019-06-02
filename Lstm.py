@@ -147,185 +147,78 @@ model = model.to(device)
 criterion = criterion.to(device)
 
 
-# def binary_accuracy(preds, y):
-#     """
-#     Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
-#     """
-    
-#     #round predictions to the closest integer
-#     rounded_preds = torch.round(torch.sigmoid(preds))
-#     correct = (rounded_preds == y).float() #convert into float for division
-#     #print(len((y.data).cpu().numpy()))
-#     f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
-#     y_mini=(y.data).cpu().numpy()
-#     pred_mini=(rounded_preds.data).cpu().numpy()
-#     acc = correct.sum() / len(correct)
-#     return acc,f1,y_mini,pred_mini
-                  
-# def train(model, iterator, optimizer, criterion):
-
-#   epoch_loss = 0
-#   epoch_acc = 0
-#   epoch_f1=0
- 
-#   model.train()
-
-#   for batch in iterator:
-#       text, text_lengths = batch.text
-#       optimizer.zero_grad()
-# #       print(batch)
-#       predictions = model(text,text_lengths).squeeze(1)
-
-#       loss = criterion(predictions, batch.label)
-
-#       acc,f1,y_mini,pred_mini= binary_accuracy(predictions, batch.label)
-#       #print(type(f1))
-#       loss.backward()
-
-#       optimizer.step()
-
-#       epoch_loss += loss.item()
-#       epoch_acc += acc.item()
-#       epoch_f1=epoch_f1+f1
-#   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
- 
- 
-# def evaluate(model, iterator, criterion):
-
-#   epoch_loss = 0
-#   epoch_acc = 0
-#   epoch_f1=0
-#   y_tot=np.array([])
-#   pred_tot=np.array([])
-#   model.eval()
-
-#   with torch.no_grad():
-
-#       for batch in iterator:
-#           text, text_lengths = batch.text
-#           predictions = model(text,text_lengths).squeeze(1)
-
-#           loss = criterion(predictions, batch.label)
-
-#           acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
-
-#           epoch_loss += loss.item()
-#           epoch_acc += acc.item()
-#           epoch_f1+=f1
-#           y_tot=np.concatenate([y_tot,y_mini])
-#           pred_tot=np.concatenate([pred_tot,pred_mini])
-#   f1=f1_score(y_tot,pred_tot,average='binary')
-#   f1_macro=f1_score(y_tot,pred_tot,average='macro')
-#   print(len(y_tot))
-#   print(cr(y_tot,pred_tot))
-#   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
-  
-# import time
-
-# def epoch_time(start_time, end_time):
-#     elapsed_time = end_time - start_time
-#     elapsed_mins = int(elapsed_time / 60)
-#     elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
-#     return elapsed_mins, elapsed_secs
-    
-    
-# N_EPOCHS = 50
-# best_valid_f1 = float('inf')
-
-# for epoch in range(N_EPOCHS):
-
-#   start_time = time.time()
-
-#   train_loss, train_acc,train_f1 = train(model, train_iterator, optimizer, criterion)
-#   valid_loss, valid_acc,valid_f1,f1,f1_macro = evaluate(model, valid_iterator, criterion)
-
-#   end_time = time.time()
-
-#   epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-
-#   if valid_f1 < best_valid_f1:
-#       best_valid_f1 = valid_f1
-#       torch.save(model.state_dict(), 'tut4-model.pt')
-
-#   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-#   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
-#   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
-
-
-
-#   model.load_state_dict(torch.load('tut4-model.pt'))
-
-# test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
-
-# print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
-# print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin : {f1:.4f}')
-# print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac : {f1_macro:.4f}')   
-
 def binary_accuracy(preds, y):
     """
     Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
     """
-
+    
     #round predictions to the closest integer
     rounded_preds = torch.round(torch.sigmoid(preds))
-    correct = (rounded_preds == y).float() #convert into float for division 
+    correct = (rounded_preds == y).float() #convert into float for division
+    #print(len((y.data).cpu().numpy()))
+    f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
+    y_mini=(y.data).cpu().numpy()
+    pred_mini=(rounded_preds.data).cpu().numpy()
     acc = correct.sum() / len(correct)
-    return acc
-  
+    return acc,f1,y_mini,pred_mini
+                  
 def train(model, iterator, optimizer, criterion):
-    
-    epoch_loss = 0
-    epoch_acc = 0
-    
-    model.train()
-    
-    for batch in iterator:
-        
-        optimizer.zero_grad()
-        
-        text, text_lengths = batch.text
-        
-        predictions = model(text, text_lengths).squeeze(1)
-        
-        loss = criterion(predictions, batch.label)
-        
-        acc = binary_accuracy(predictions, batch.label)
-        
-        loss.backward()
-        
-        optimizer.step()
-        
-        epoch_loss += loss.item()
-        epoch_acc += acc.item()
-        
-    return epoch_loss / len(iterator), epoch_acc / len(iterator)
-  
-  
-def evaluate(model, iterator, criterion):
-    
-    epoch_loss = 0
-    epoch_acc = 0
-    
-    model.eval()
-    
-    with torch.no_grad():
-    
-        for batch in iterator:
 
-            text, text_lengths = batch.text
-            
-            predictions = model(text, text_lengths).squeeze(1)
-            print(text_lengths)
-            loss = criterion(predictions, batch.label)
-            
-            acc = binary_accuracy(predictions, batch.label)
-            print(acc.item())
-            epoch_loss += loss.item()
-            epoch_acc += acc.item()
-        
-    return epoch_loss / len(iterator), epoch_acc / len(iterator)
-  
-  
+  epoch_loss = 0
+  epoch_acc = 0
+  epoch_f1=0
+ 
+  model.train()
+
+  for batch in iterator:
+      text, text_lengths = batch.text
+      optimizer.zero_grad()
+#       print(batch)
+      predictions = model(text,text_lengths).squeeze(1)
+
+      loss = criterion(predictions, batch.label)
+
+      acc,f1,y_mini,pred_mini= binary_accuracy(predictions, batch.label)
+      #print(type(f1))
+      loss.backward()
+
+      optimizer.step()
+
+      epoch_loss += loss.item()
+      epoch_acc += acc.item()
+      epoch_f1=epoch_f1+f1
+  return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
+ 
+ 
+def evaluate(model, iterator, criterion):
+
+  epoch_loss = 0
+  epoch_acc = 0
+  epoch_f1=0
+  y_tot=np.array([])
+  pred_tot=np.array([])
+  model.eval()
+
+  with torch.no_grad():
+
+      for batch in iterator:
+          text, text_lengths = batch.text
+          predictions = model(text,text_lengths).squeeze(1)
+
+          loss = criterion(predictions, batch.label)
+
+          acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
+
+          epoch_loss += loss.item()
+          epoch_acc += acc.item()
+          epoch_f1+=f1
+          y_tot=np.concatenate([y_tot,y_mini])
+          pred_tot=np.concatenate([pred_tot,pred_mini])
+  f1=f1_score(y_tot,pred_tot,average='binary')
+  f1_macro=f1_score(y_tot,pred_tot,average='macro')
+  print(len(y_tot))
+  print(cr(y_tot,pred_tot))
+  return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
   
 import time
 
@@ -334,32 +227,139 @@ def epoch_time(start_time, end_time):
     elapsed_mins = int(elapsed_time / 60)
     elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
     return elapsed_mins, elapsed_secs
-  
-N_EPOCHS = 5
-
-best_valid_loss = float('inf')
+    
+    
+N_EPOCHS = 50
+best_valid_f1 = float('inf')
 
 for epoch in range(N_EPOCHS):
 
-    start_time = time.time()
-    
-    train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
-    valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
-    
-    end_time = time.time()
+  start_time = time.time()
 
-    epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-    
-    if valid_loss < best_valid_loss:
-        best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'tut2-model.pt')
-    
-    print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-    print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
-    
-model.load_state_dict(torch.load('tut2-model.pt'))
+  train_loss, train_acc,train_f1 = train(model, train_iterator, optimizer, criterion)
+  valid_loss, valid_acc,valid_f1,f1,f1_macro = evaluate(model, valid_iterator, criterion)
 
-test_loss, test_acc = evaluate(model, test_iterator, criterion)
+  end_time = time.time()
 
-print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
+  epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+
+  if valid_f1 < best_valid_f1:
+      best_valid_f1 = valid_f1
+      torch.save(model.state_dict(), 'tut4-model.pt')
+
+  print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+  print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
+  print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
+
+
+
+  model.load_state_dict(torch.load('tut4-model.pt'))
+
+test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
+
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin : {f1:.4f}')
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac : {f1_macro:.4f}')   
+
+# def binary_accuracy(preds, y):
+#     """
+#     Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
+#     """
+
+#     #round predictions to the closest integer
+#     rounded_preds = torch.round(torch.sigmoid(preds))
+#     correct = (rounded_preds == y).float() #convert into float for division 
+#     acc = correct.sum() / len(correct)
+#     return acc
+  
+# def train(model, iterator, optimizer, criterion):
+    
+#     epoch_loss = 0
+#     epoch_acc = 0
+    
+#     model.train()
+    
+#     for batch in iterator:
+        
+#         optimizer.zero_grad()
+        
+#         text, text_lengths = batch.text
+        
+#         predictions = model(text, text_lengths).squeeze(1)
+        
+#         loss = criterion(predictions, batch.label)
+        
+#         acc = binary_accuracy(predictions, batch.label)
+        
+#         loss.backward()
+        
+#         optimizer.step()
+        
+#         epoch_loss += loss.item()
+#         epoch_acc += acc.item()
+        
+#     return epoch_loss / len(iterator), epoch_acc / len(iterator)
+  
+  
+# def evaluate(model, iterator, criterion):
+    
+#     epoch_loss = 0
+#     epoch_acc = 0
+    
+#     model.eval()
+    
+#     with torch.no_grad():
+    
+#         for batch in iterator:
+
+#             text, text_lengths = batch.text
+            
+#             predictions = model(text, text_lengths).squeeze(1)
+#             print(text_lengths)
+#             loss = criterion(predictions, batch.label)
+            
+#             acc = binary_accuracy(predictions, batch.label)
+#             print(acc.item())
+#             epoch_loss += loss.item()
+#             epoch_acc += acc.item()
+        
+#     return epoch_loss / len(iterator), epoch_acc / len(iterator)
+  
+  
+  
+# import time
+
+# def epoch_time(start_time, end_time):
+#     elapsed_time = end_time - start_time
+#     elapsed_mins = int(elapsed_time / 60)
+#     elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
+#     return elapsed_mins, elapsed_secs
+  
+# N_EPOCHS = 5
+
+# best_valid_loss = float('inf')
+
+# for epoch in range(N_EPOCHS):
+
+#     start_time = time.time()
+    
+#     train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
+#     valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+    
+#     end_time = time.time()
+
+#     epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+    
+#     if valid_loss < best_valid_loss:
+#         best_valid_loss = valid_loss
+#         torch.save(model.state_dict(), 'tut2-model.pt')
+    
+#     print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+#     print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%')
+#     print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%')
+    
+# model.load_state_dict(torch.load('tut2-model.pt'))
+
+# test_loss, test_acc = evaluate(model, test_iterator, criterion)
+
+# print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
