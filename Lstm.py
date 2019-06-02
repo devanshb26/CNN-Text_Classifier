@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
-from sklearn.metrics import classification_report as cr
+from sklearn.metrics import f1_score,classification_report as cr
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
