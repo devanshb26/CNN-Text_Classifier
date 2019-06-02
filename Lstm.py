@@ -319,7 +319,7 @@ def evaluate(model, iterator, criterion):
             loss = criterion(predictions, batch.label)
             
             acc = binary_accuracy(predictions, batch.label)
-
+            print(209)
             epoch_loss += loss.item()
             epoch_acc += acc.item()
         
