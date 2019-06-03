@@ -85,9 +85,14 @@ class RNN(nn.Module):
     def forward(self, text, text_lengths):
         
         #text = [sent len, batch size]
-        
+        text_cnn = text.permute(1, 0)
         embedded = self.dropout(self.embedding(text))
+        ###################
+        embedded_cnn = self.embedding(text_cnn)
+                
+        #embedded = [batch size, sent len, emb dim]
         
+        embedded_cnn = embedded_cnn.unsqueeze(1)
         #embedded = [sent len, batch size, emb dim]
         
         #pack sequence
@@ -97,7 +102,7 @@ class RNN(nn.Module):
         
         packed_output, (hidden, cell) = self.rnn(packed_embedded)
         #########
-        conved = [F.relu(conv(embedded)).squeeze(3) for conv in self.convs]
+        conved = [F.relu(conv(embedded_cnn)).squeeze(3) for conv in self.convs]
         pooled = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in conved]
         
         #unpack sequence
@@ -117,7 +122,7 @@ class RNN(nn.Module):
         cat = self.dropout(torch.cat(pooled, dim = 1))
          
          
-        lstm_cnn=torch.cat((cat,hidden),dim=1)
+        lstm_cnn=torch.cat((cat,hidden.squeeze(0),dim=1)
         #hidden = [batch size, hid dim * num directions]
             
         return self.fc1(lstm_cnn)
