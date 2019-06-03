@@ -12,8 +12,8 @@ fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -27,7 +27,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -98,7 +98,7 @@ class RNN(nn.Module):
         
 
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 HIDDEN_DIM = 256
 OUTPUT_DIM = 1
 N_LAYERS = 2
