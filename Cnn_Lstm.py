@@ -127,13 +127,17 @@ INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
 HIDDEN_DIM = 256
 OUTPUT_DIM = 1
+N_FILTERS = 150
+FILTER_SIZES = [2,3]
 N_LAYERS = 2
 BIDIRECTIONAL = True
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = RNN(INPUT_DIM, 
-            EMBEDDING_DIM, 
+            EMBEDDING_DIM,
+            N_FILTERS,
+            FILTER_SIZES,
             HIDDEN_DIM, 
             OUTPUT_DIM, 
             N_LAYERS, 
