@@ -31,8 +31,8 @@ TEXT.build_vocab(train_data,
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
-                  
-BATCH_SIZE = 64
+# batch_size changed from 64 to 16                  
+BATCH_SIZE = 16
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -100,12 +100,12 @@ class RNN(nn.Module):
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
 # hidden_dim changed from 256 to 128
-HIDDEN_DIM = 128
+HIDDEN_DIM = 256
 OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
 # dropout changed from 0.5 to 0.7
-DROPOUT = 0.7
+DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = RNN(INPUT_DIM, 
