@@ -268,7 +268,7 @@ def epoch_time(start_time, end_time):
     
     
 N_EPOCHS = 50
-best_valid_f1 = float('inf')
+best_valid_f1 = float(0)
 
 for epoch in range(N_EPOCHS):
 
@@ -281,7 +281,7 @@ for epoch in range(N_EPOCHS):
 
   epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-  if valid_f1 < best_valid_f1:
+  if valid_f1 > best_valid_f1:
       best_valid_f1 = valid_f1
       torch.save(model.state_dict(), 'tut4-model.pt')
 
