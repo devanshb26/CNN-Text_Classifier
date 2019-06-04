@@ -11,9 +11,9 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'SubtaskB_EvaluationData_labeled.csv',
-                                        validation = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
-                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        train = 'V1.4_Training.csv',
+                                        validation = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -32,7 +32,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch_size changed from 64 to 16                  
-BATCH_SIZE = 16
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
