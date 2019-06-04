@@ -5,6 +5,7 @@ from torchtext import data
 from torchtext import datasets
 import numpy as np
 from sklearn.metrics import classification_report as cr
+from sklearn.metrics import confusion_matrix as cm
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
@@ -217,6 +218,7 @@ def evaluate(model, iterator, criterion):
   f1_macro=f1_score(y_tot,pred_tot,average='macro')
   print(len(y_tot))
   print(cr(y_tot,pred_tot))
+  print(cm(y_tot,pred_tot))
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
 
 
