@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
-from sklearn.metrics import f1_score,classification_report as cr
+from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
@@ -12,8 +12,8 @@ fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
-                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
+                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -255,6 +255,7 @@ def evaluate(model, iterator, criterion):
   f1_macro=f1_score(y_tot,pred_tot,average='macro')
   print(len(y_tot))
   print(cr(y_tot,pred_tot))
+  print(cm(y_tot,pred_tot))
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
   
 import time
