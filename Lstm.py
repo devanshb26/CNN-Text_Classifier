@@ -11,8 +11,8 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        train = 'SubtaskB_EvaluationData_labeled.csv',
+                                        validation = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
                                         test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
