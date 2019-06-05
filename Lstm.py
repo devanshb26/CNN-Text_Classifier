@@ -5,10 +5,10 @@ from torchtext import data
 from torchtext import datasets
 import numpy as np
 
-# SEED = 1234
+SEED = 1234
 
-# torch.manual_seed(SEED)
-# torch.backends.cudnn.deterministic = True
+torch.manual_seed(SEED)
+torch.backends.cudnn.deterministic = True
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
