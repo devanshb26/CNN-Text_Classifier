@@ -41,7 +41,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
                   
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
