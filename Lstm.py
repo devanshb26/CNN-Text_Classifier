@@ -78,7 +78,7 @@ class RNN(nn.Module):
         self.fc1 = nn.Linear(hidden_dim * 2, 128)
         torch.nn.init.xavier_uniform(self.fc1.weight)
         self.fc2 = nn.Linear(128, output_dim)
-        torch.nn.init.xavier_uniform(self.fc1.weight)
+        torch.nn.init.xavier_uniform(self.fc2.weight)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(dropout)
 #         for m in self.modules():
@@ -116,7 +116,7 @@ class RNN(nn.Module):
 #         h_lstm_atten = self.attention_layer(hidden)
         out = self.fc1(hidden.squeeze(0))
         out=self.relu(out)
-        out=self.fc1(out)
+        out=self.fc2(out)
         out=self.relu(out)
         return out
         
