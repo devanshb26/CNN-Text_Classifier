@@ -75,9 +75,9 @@ class RNN(nn.Module):
                            bidirectional=bidirectional, 
                            dropout=dropout)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
-        
+        torch.nn.init.xavier_uniform(self.rnn.weight)
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
-        
+        torch.nn.init.xavier_uniform(self.fc.weight)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, text, text_lengths):
@@ -106,11 +106,11 @@ class RNN(nn.Module):
         #and apply dropout
         
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
-        torch.nn.init.xavier_uniform(hidden.weight)       
+               
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
         fc1=self.fc(hidden.squeeze(0))
-        torch.nn.init.xavier_uniform(fc1.weight)
+        
         return fc1
         
 
