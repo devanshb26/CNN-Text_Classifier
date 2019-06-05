@@ -73,7 +73,7 @@ class CNN(nn.Module):
         nn.init.kaiming_normal_(self.fc1.weight)
         self.fc2 = nn.Linear(250,output_dim)
         nn.init.kaiming_normal_(self.fc2.weight)
-        self.relu=nn.Relu()
+        self.relu=nn.ReLU()
 #         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
