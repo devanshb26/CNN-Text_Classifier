@@ -4,6 +4,12 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
+
+SEED = 1234
+
+torch.manual_seed(SEED)
+torch.backends.cudnn.deterministic = True
+
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
@@ -27,7 +33,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -40,6 +46,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
     (train_data, valid_data, test_data),
     batch_size = BATCH_SIZE,
+    shuffle=False
     sort_key=lambda x: len(x.text),
     sort_within_batch = True,
     device = device)
@@ -99,14 +106,16 @@ class RNN(nn.Module):
         #and apply dropout
         
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
-                
+        torch.nn.init.xavier_uniform(hidden.weight)       
 #         hidden = [batch size, hid dim * num directions]
-#         h_lstm_atten = self.attention_layer(hidden)   
-        return self.fc(hidden.squeeze(0))
+#         h_lstm_atten = self.attention_layer(hidden)
+        fc1=self.fc(hidden.squeeze(0))
+        torch.nn.init.xavier_uniform(fc1.weight)
+        return fc1
         
 
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 # hidden_dim changed from 256 to 128
 HIDDEN_DIM = 256
 OUTPUT_DIM = 1
@@ -240,7 +249,7 @@ def epoch_time(start_time, end_time):
     return elapsed_mins, elapsed_secs
     
     
-N_EPOCHS = 100
+N_EPOCHS = 10
 best_valid_f1 = float(0)
 
 for epoch in range(N_EPOCHS):
