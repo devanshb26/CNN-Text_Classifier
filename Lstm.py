@@ -60,8 +60,9 @@ class RNN(nn.Module):
                            num_layers=n_layers, 
                            bidirectional=bidirectional, 
                            dropout=dropout)
+        self.attention_layer = Attention(hidden_dim * 2,128)
         
-        self.fc = nn.Linear(hidden_dim * 2, output_dim)
+        self.fc = nn.Linear(128, output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -93,8 +94,8 @@ class RNN(nn.Module):
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
                 
         #hidden = [batch size, hid dim * num directions]
-            
-        return self.fc(hidden.squeeze(0))
+        h_lstm_atten = self.attention_layer(hidden)   
+        return self.fc(h_lstm_atten.squeeze(0))
         
 
 INPUT_DIM = len(TEXT.vocab)
