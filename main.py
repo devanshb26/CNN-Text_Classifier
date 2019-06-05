@@ -9,15 +9,15 @@ from sklearn.metrics import confusion_matrix as cm
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
-fields = [('label', LABEL),('text', TEXT)]
+fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-#                                         train = 'V1.4_Training.csv',
-#                                         validation = 'SubtaskB_EvaluationData_labeled.csv',
-#                                         test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
-                                        train = 'train_spacy.csv',
-                                        validation = 'valid_spacy.csv',
-                                        test = 'test_spacy.csv',
+                                        train = 'V1.4_Training.csv',
+                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+#                                         train = 'train_spacy.csv',
+#                                         validation = 'valid_spacy.csv',
+#                                         test = 'test_spacy.csv',
 #                                         #sort_key=lambda x: len(x.Text),
                                         format = 'csv',
                                         fields = fields,
@@ -28,7 +28,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.6B.100d', 
+                 vectors = 'glove.840B.300d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -103,7 +103,7 @@ class CNN(nn.Module):
         return self.fc1(cat_relu)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 300
 N_FILTERS = 150
 HIDDEN_DIM=150
 Dropout_2=0.75
