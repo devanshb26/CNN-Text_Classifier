@@ -6,10 +6,10 @@ from torchtext import datasets
 import numpy as np
 from sklearn.metrics import classification_report as cr
 from sklearn.metrics import confusion_matrix as cm
-seed = 0
-torch.manual_seed(seed)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed_all(seed)
+# seed = 0
+# torch.manual_seed(seed)
+# if torch.cuda.is_available():
+#     torch.cuda.manual_seed_all(seed)
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
