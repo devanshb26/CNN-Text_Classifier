@@ -8,19 +8,19 @@ from sklearn.metrics import f1_score,classification_report as cr,confusion_matri
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
-fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
+fields = [('label', LABEL),('text', TEXT)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
-                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
-#                                         train = 'train_spacy.csv',
-#                                         validation = 'valid_spacy.csv',
-#                                         test = 'test_spacy.csv',
+#                                         train = 'V1.4_Training.csv',
+#                                         validation = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+#                                         test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        train = 'train_spacy.csv',
+                                        validation = 'valid_spacy.csv',
+                                        test = 'test_spacy.csv',
 #                                         #sort_key=lambda x: len(x.Text),
                                         format = 'csv',
                                         fields = fields,
-                                        skip_header = True
+                                        skip_header = False
 )
 print(vars(train_data[0]))
 MAX_VOCAB_SIZE = 25_000
@@ -52,13 +52,13 @@ import torch.nn as nn
 #     def __init__(self):
 #         super(Attention_Net, self).__init__()
 
-# class RNN(nn.Module):
-class Attention_Net(nn.Module):
+class RNN(nn.Module):
+# class Attention_Net(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, 
                  bidirectional, dropout, pad_idx):
         
-#         super().__init__()
-        super(Attention_Net, self).__init__()
+        super().__init__()
+#         super(Attention_Net, self).__init__()
         
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
         
@@ -67,9 +67,9 @@ class Attention_Net(nn.Module):
                            num_layers=n_layers, 
                            bidirectional=bidirectional, 
                            dropout=dropout)
-        self.attention_layer = Attention(hidden_dim * 2,128)
+#         self.attention_layer = Attention(hidden_dim * 2,128)
         
-        self.fc = nn.Linear(128, output_dim)
+        self.fc = nn.Linear(hidden_dim * 2, output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -100,9 +100,9 @@ class Attention_Net(nn.Module):
         
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
                 
-        #hidden = [batch size, hid dim * num directions]
-        h_lstm_atten = self.attention_layer(hidden)   
-        return self.fc(h_lstm_atten.squeeze(0))
+#         hidden = [batch size, hid dim * num directions]
+#         h_lstm_atten = self.attention_layer(hidden)   
+        return self.fc(hidden.squeeze(0))
         
 
 INPUT_DIM = len(TEXT.vocab)
@@ -116,7 +116,7 @@ BIDIRECTIONAL = True
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-model = Attention_Net(INPUT_DIM, 
+model = RNN(INPUT_DIM, 
             EMBEDDING_DIM, 
             HIDDEN_DIM, 
             OUTPUT_DIM, 
