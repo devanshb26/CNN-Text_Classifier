@@ -41,7 +41,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
                   
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -244,7 +244,7 @@ def epoch_time(start_time, end_time):
   elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
   return elapsed_mins, elapsed_secs
 
-N_EPOCHS = 10
+N_EPOCHS = 20
 best_valid_f1 = float(0)
 
 for epoch in range(N_EPOCHS):
