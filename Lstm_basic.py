@@ -389,15 +389,4 @@ print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac 
 # test_loss, test_acc = evaluate(model, test_iterator, criterion)
 
 # print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%')
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
