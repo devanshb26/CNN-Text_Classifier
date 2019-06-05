@@ -137,7 +137,7 @@ class RNN(nn.Module):
         #hidden = [batch size, hid dim * num directions]
         out=self.fc1(lstm_cnn)
         out=self.relu(out)
-        out=sel.fc2(out)
+        out=self.fc2(out)
         out=self.relu(out)
         out=self.fc3(out)
             
