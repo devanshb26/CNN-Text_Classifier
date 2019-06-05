@@ -6,6 +6,10 @@ from torchtext import datasets
 import numpy as np
 from sklearn.metrics import classification_report as cr
 from sklearn.metrics import confusion_matrix as cm
+seed = 0
+torch.manual_seed(seed)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(seed)
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
@@ -28,7 +32,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -39,6 +43,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
     (train_data, valid_data, test_data),
+    shuffle=False
     sort_key=lambda x: len(x.text),
     batch_size = BATCH_SIZE, 
     device = device)
@@ -103,7 +108,7 @@ class CNN(nn.Module):
         return self.fc1(cat_relu)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 N_FILTERS = 150
 HIDDEN_DIM=150
 Dropout_2=0.75
