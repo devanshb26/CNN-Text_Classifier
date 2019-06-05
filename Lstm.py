@@ -76,7 +76,7 @@ class RNN(nn.Module):
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
         self.fc1 = nn.Linear(hidden_dim * 2, output_dim)
-        torch.nn.init.xavier_uniform(self.fc1.weight)
+#         nn.init.kaiming_normal_(self.fc1.weight)
 #         self.fc2 = nn.Linear(128, output_dim)
 #         torch.nn.init.xavier_uniform(self.fc2.weight)
         self.relu = nn.ReLU()
