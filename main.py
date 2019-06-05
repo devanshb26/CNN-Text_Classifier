@@ -69,8 +69,11 @@ class CNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
-#         self.relu=nn.Relu()
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 250)
+        nn.init.kaiming_normal_(self.fc1.weight)
+        self.fc2 = nn.Linear(250,output_dim)
+        nn.init.kaiming_normal_(self.fc2.weight)
+        self.relu=nn.Relu()
 #         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
         self.dropout = nn.Dropout(dropout)
@@ -92,7 +95,7 @@ class CNN(nn.Module):
         
         #embedded = [batch size, 1, sent len, emb dim]
         
-        conved = [F.relu(conv(embedded)).squeeze(3) for conv in self.convs]
+        conved = [conv(embedded).squeeze(3) for conv in self.convs]
             
         #conved_n = [batch size, n_filters, sent len - filter_sizes[n] + 1]
 #         print(conv.shape[2]+"   "+conv.shape[1] for conv in conved)        
@@ -100,24 +103,26 @@ class CNN(nn.Module):
         
         #pooled_n = [batch size, n_filters]
         
-        cat = self.dropout(torch.cat(pooled, dim = 1))
+        cat = torch.cat(pooled, dim = 1)
+        out=self.dropout(self.fc1(cat))
 
         #cat = [batch size, n_filters * len(filter_sizes)]
 #         f1=self.fc1(cat)
 #         f1_relu=F.relu(f1)
 #         d=self.dropout_2(f1_relu)
 #         return self.fc2(d)
-        cat_relu=F.relu(cat)
-        return self.fc1(cat_relu)
+        out=self.relu(out)
+        out=self.fc2(out)
+        return out
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
-N_FILTERS = 150
-HIDDEN_DIM=150
+N_FILTERS = 250
+HIDDEN_DIM=250
 Dropout_2=0.75
 FILTER_SIZES = [2,3]
 OUTPUT_DIM = 1
-DROPOUT = 0.7
+DROPOUT = 0.75
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX,Dropout_2)
