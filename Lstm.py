@@ -47,11 +47,18 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 
 import torch.nn as nn
 
-class RNN(nn.Module):
+
+# class Attention_Net(nn.Module):
+#     def __init__(self):
+#         super(Attention_Net, self).__init__()
+
+# class RNN(nn.Module):
+class Attention_Net(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, 
                  bidirectional, dropout, pad_idx):
         
-        super().__init__()
+#         super().__init__()
+        super(Attention_Net, self).__init__()
         
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
         
@@ -109,7 +116,7 @@ BIDIRECTIONAL = True
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-model = RNN(INPUT_DIM, 
+model = Attention_Net(INPUT_DIM, 
             EMBEDDING_DIM, 
             HIDDEN_DIM, 
             OUTPUT_DIM, 
