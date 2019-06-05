@@ -4,6 +4,11 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
+SEED = 1234
+
+torch.manual_seed(SEED)
+torch.backends.cudnn.deterministic = True
+
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
@@ -40,7 +45,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
     (train_data, valid_data, test_data),
     batch_size = BATCH_SIZE,
-#     sort_key=lambda x: len(x.text),
+    shuffle=False,
+    sort_key=lambda x: len(x.text),
     sort_within_batch = True,
     device = device)
 
