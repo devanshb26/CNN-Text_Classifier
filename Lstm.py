@@ -75,13 +75,16 @@ class RNN(nn.Module):
                            dropout=dropout)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
-        self.fc = nn.Linear(hidden_dim * 2, output_dim)
-#         torch.nn.init.xavier_uniform(self.fc.weight)
+        self.fc1 = nn.Linear(hidden_dim * 2, 128)
+        torch.nn.init.xavier_uniform(self.fc1.weight)
+        self.fc2 = nn.Linear(128, output_dim)
+        torch.nn.init.xavier_uniform(self.fc1.weight)
+        self.relu = nn.ReLU()
         self.dropout = nn.Dropout(dropout)
-        for m in self.modules():
-          if isinstance(m, nn.Linear):
-            nn.init.xavier_uniform(m.weight)
-            m.bias.data.fill_(0.0)
+#         for m in self.modules():
+#           if isinstance(m, nn.Linear):
+#             nn.init.xavier_uniform(m.weight)
+#             m.bias.data.fill_(0.0)
     def forward(self, text, text_lengths):
         
         #text = [sent len, batch size]
@@ -111,9 +114,11 @@ class RNN(nn.Module):
                
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
-        
-        
-        return self.fc(hidden.squeeze(0))
+        out = self.fc1(hidden.squeeze(0))
+        out=self.relu(out)
+        out=self.fc1(out)
+        out=self.relu(out)
+        return out
         
 
 INPUT_DIM = len(TEXT.vocab)
