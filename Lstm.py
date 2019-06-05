@@ -8,15 +8,15 @@ from sklearn.metrics import f1_score,classification_report as cr,confusion_matri
 TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
-fields = [('label', LABEL),('text', TEXT)]
+fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-#                                         train = 'V1.4_Training.csv',
-#                                         validation = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
-#                                         test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
-                                        train = 'train_spacy.csv',
-                                        validation = 'valid_spacy.csv',
-                                        test = 'test_spacy.csv',
+                                        train = 'V1.4_Training.csv',
+                                        validation = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+#                                         train = 'train_spacy.csv',
+#                                         validation = 'valid_spacy.csv',
+#                                         test = 'test_spacy.csv',
 #                                         #sort_key=lambda x: len(x.Text),
                                         format = 'csv',
                                         fields = fields,
