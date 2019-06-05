@@ -53,9 +53,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 
 import torch.nn as nn
 
-if isinstance(m, nn.Linear):
-    nn.init.xavier_uniform(m.weight)
-    m.bias.data.fill_(0.0)
+
 # class Attention_Net(nn.Module):
 #     def __init__(self):
 #         super(Attention_Net, self).__init__()
