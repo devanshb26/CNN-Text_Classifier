@@ -75,9 +75,9 @@ class RNN(nn.Module):
                            bidirectional=bidirectional, 
                            dropout=dropout)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
-        torch.nn.init.xavier_uniform(self.rnn.weight)
+#         torch.nn.init.xavier_uniform(self.rnn.weight)
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
-        torch.nn.init.xavier_uniform(self.fc.weight)
+#         torch.nn.init.xavier_uniform(self.fc.weight)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, text, text_lengths):
@@ -125,6 +125,11 @@ BIDIRECTIONAL = True
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
+def weights_init(m):
+    if isinstance(m, nn.Linear) or isinstance(m, nn.LSTM) :
+        xavier(m.weight.data)
+        xavier(m.bias.data)
+
 model = RNN(INPUT_DIM, 
             EMBEDDING_DIM, 
             HIDDEN_DIM, 
@@ -134,7 +139,7 @@ model = RNN(INPUT_DIM,
             DROPOUT, 
             PAD_IDX)
             
-            
+model.apply(weights_init)           
             
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
