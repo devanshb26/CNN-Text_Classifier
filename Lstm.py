@@ -53,7 +53,9 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
 
 import torch.nn as nn
 
-
+if isinstance(m, nn.Linear):
+    nn.init.xavier_uniform(m.weight)
+    m.bias.data.fill_(0.0)
 # class Attention_Net(nn.Module):
 #     def __init__(self):
 #         super(Attention_Net, self).__init__()
@@ -78,7 +80,10 @@ class RNN(nn.Module):
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
 #         torch.nn.init.xavier_uniform(self.fc.weight)
         self.dropout = nn.Dropout(dropout)
-        
+        for m in self.modules():
+          if isinstance(m, nn.Linear):
+            nn.init.xavier_uniform(m.weight)
+            m.bias.data.fill_(0.0)
     def forward(self, text, text_lengths):
         
         #text = [sent len, batch size]
