@@ -108,9 +108,9 @@ class RNN(nn.Module):
                
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
-        fc1=self.fc(hidden.squeeze(0))
         
-        return fc1
+        
+        return self.fc(hidden.squeeze(0))
         
 
 INPUT_DIM = len(TEXT.vocab)
