@@ -71,6 +71,8 @@ class RNN(nn.Module):
         
         
         
+        
+        self.relu = nn.ReLU()
         #self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
         
         self.convs = nn.ModuleList([
@@ -80,9 +82,12 @@ class RNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters+hidden_dim * 2, output_dim)
-        
-        
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters+hidden_dim * 2, 128)
+        nn.init.kaiming_normal_(self.fc1.weight)
+        self.fc2 = nn.Linear(128, 64)
+        nn.init.kaiming_normal_(self.fc2.weight)
+        self.fc3 = nn.Linear(64, output_dim)
+        nn.init.kaiming_normal_(self.fc3.weight)
         
         
         
@@ -130,8 +135,13 @@ class RNN(nn.Module):
          
         lstm_cnn=torch.cat((cat,hidden.squeeze(0)),dim=1)
         #hidden = [batch size, hid dim * num directions]
+        out=self.fc1(lstm_cnn)
+        out=self.relu(out)
+        out=sel.fc2(out)
+        out=self.relu(out)
+        out=self.fc3(out)
             
-        return self.fc1(lstm_cnn)
+        return out
         
 
 INPUT_DIM = len(TEXT.vocab)
