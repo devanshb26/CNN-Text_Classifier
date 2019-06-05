@@ -127,8 +127,9 @@ PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 def weights_init(m):
     if isinstance(m, nn.Linear) or isinstance(m, nn.LSTM) :
-        xavier(m.weight.data)
-        xavier(m.bias.data)
+        torch.nn.init.xavier_uniform(m.weight)
+        m.bias.data.fill_(0.01)
+        
 
 model = RNN(INPUT_DIM, 
             EMBEDDING_DIM, 
