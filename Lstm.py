@@ -124,10 +124,7 @@ BIDIRECTIONAL = True
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-def weights_init(m):
-    if isinstance(m, nn.Linear):
-        torch.nn.init.xavier_uniform(m.weight)
-        m.bias.data.fill_(0.01)
+
         
 
 model = RNN(INPUT_DIM, 
@@ -139,7 +136,7 @@ model = RNN(INPUT_DIM,
             DROPOUT, 
             PAD_IDX)
             
-model.apply(weights_init)           
+          
             
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
