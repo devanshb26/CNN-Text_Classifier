@@ -1,12 +1,23 @@
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
-SEED = 1234
 
+
+import random
+
+from torch.backends import cudnn
+SEED = 1234
+random.seed(SEED)
+np.random.seed(SEED)
 torch.manual_seed(SEED)
+# seed = 0
+# torch.manual_seed(seed)
+# if torch.cuda.is_available():
+#     torch.cuda.manual_seed_all(seed)
 torch.backends.cudnn.deterministic = True
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
@@ -285,7 +296,7 @@ def epoch_time(start_time, end_time):
     
 N_EPOCHS = 20
 best_valid_f1 = float(0)
-
+c=0
 for epoch in range(N_EPOCHS):
 
   start_time = time.time()
@@ -299,8 +310,13 @@ for epoch in range(N_EPOCHS):
 
   if valid_f1 > best_valid_f1:
       best_valid_f1 = valid_f1
+      c=0
       torch.save(model.state_dict(), 'tut4-model.pt')
-
+  else:
+    c=c+1
+  if c==3:
+    print(epoch)
+    break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
