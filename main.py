@@ -76,9 +76,9 @@ class CNN(nn.Module):
                                     ])
         
         self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 250)
-        nn.init.kaiming_normal_(self.fc1.weight)
+#         nn.init.kaiming_normal_(self.fc1.weight)
         self.fc2 = nn.Linear(250,output_dim)
-        nn.init.kaiming_normal_(self.fc2.weight)
+#         nn.init.kaiming_normal_(self.fc2.weight)
         self.relu=nn.ReLU()
 #         self.fc2 = nn.Linear(hidden_dim, output_dim)
         
