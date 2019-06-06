@@ -308,8 +308,8 @@ for epoch in range(N_EPOCHS):
 
   epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-  if valid_f1 > best_valid_f1:
-      best_valid_f1 = valid_f1
+  if f1 > best_valid_f1:
+      best_valid_f1 = f1
       c=0
       torch.save(model.state_dict(), 'tut4-model.pt')
   else:
