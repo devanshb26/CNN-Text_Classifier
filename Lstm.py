@@ -85,7 +85,7 @@ class RNN(nn.Module):
                            dropout=dropout)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
-        nn.init.kaiming_normal_(self.rnn.weight)
+        #nn.init.kaiming_normal_(self.rnn.weight)
         self.fc1 = nn.Linear(hidden_dim * 2, 128)
         nn.init.kaiming_normal_(self.fc1.weight)
         self.fc2 = nn.Linear(128, output_dim)
@@ -125,7 +125,7 @@ class RNN(nn.Module):
                
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
-        out = self.fc1(hidden.squeeze(0))
+        out = self.dropout(self.fc1(hidden.squeeze(0)))
         out=self.relu(out)
         out=self.fc2(out)
 #         out=self.relu(out)
@@ -140,7 +140,7 @@ OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
 # dropout changed from 0.5 to 0.7
-DROPOUT = 0.3
+DROPOUT = 0.2
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 
