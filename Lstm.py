@@ -85,6 +85,7 @@ class RNN(nn.Module):
                            dropout=dropout)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
+        nn.init.kaiming_normal_(self.rnn.weight)
         self.fc1 = nn.Linear(hidden_dim * 2, 128)
         nn.init.kaiming_normal_(self.fc1.weight)
         self.fc2 = nn.Linear(128, output_dim)
