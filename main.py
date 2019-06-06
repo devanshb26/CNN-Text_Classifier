@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix as cm
 # if torch.cuda.is_available():
 #     torch.cuda.manual_seed_all(seed)
 SEED = 1234
-
+np.random.seed(SEED)
 torch.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 TEXT = data.Field(tokenize='spacy')
