@@ -14,8 +14,8 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 
 if args.cuda:
-torch.cuda.manual_seed(SEED)
-cudnn.benchmark = True
+  torch.cuda.manual_seed(SEED)
+  cudnn.benchmark = True
 # seed = 0
 # torch.manual_seed(seed)
 # if torch.cuda.is_available():
