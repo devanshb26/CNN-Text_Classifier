@@ -7,21 +7,19 @@ import numpy as np
 from sklearn.metrics import classification_report as cr
 from sklearn.metrics import confusion_matrix as cm
 
+import random
 
 from torch.backends import cudnn
 SEED = 1234
+random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
-
-if args.cuda:
-  torch.cuda.manual_seed(SEED)
-  cudnn.benchmark = True
 # seed = 0
 # torch.manual_seed(seed)
 # if torch.cuda.is_available():
 #     torch.cuda.manual_seed_all(seed)
+torch.backends.cudnn.deterministic = True
 
-# torch.backends.cudnn.deterministic = True
 TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
