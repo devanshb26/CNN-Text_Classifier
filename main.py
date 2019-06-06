@@ -265,7 +265,7 @@ for epoch in range(N_EPOCHS):
   else:
     c=c+1
   if c==3:
-    print(c)
+    print(epoch)
     break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
