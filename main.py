@@ -47,7 +47,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
                   
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -109,7 +109,7 @@ class CNN(nn.Module):
         
         #pooled_n = [batch size, n_filters]
         
-        cat = torch.cat(pooled, dim = 1)
+        cat = self.relu(torch.cat(pooled, dim = 1))
         out=self.dropout(self.fc1(cat))
 
         #cat = [batch size, n_filters * len(filter_sizes)]
