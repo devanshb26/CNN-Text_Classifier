@@ -109,7 +109,7 @@ class CNN(nn.Module):
         
         #pooled_n = [batch size, n_filters]
         
-        cat = self.relu(torch.cat(pooled, dim = 1))
+        cat = torch.cat(pooled, dim = 1)
         out=self.dropout(self.fc1(cat))
 
         #cat = [batch size, n_filters * len(filter_sizes)]
