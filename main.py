@@ -101,7 +101,7 @@ class CNN(nn.Module):
         
         #embedded = [batch size, 1, sent len, emb dim]
         
-        conved = [conv(embedded).squeeze(3) for conv in self.convs]
+        conved = [self.relu(conv(embedded).squeeze(3)) for conv in self.convs]
             
         #conved_n = [batch size, n_filters, sent len - filter_sizes[n] + 1]
 #         print(conv.shape[2]+"   "+conv.shape[1] for conv in conved)        
