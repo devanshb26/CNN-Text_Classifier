@@ -55,8 +55,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", " email ", text)
   text = re.sub(r"j k", " jk ", text)
   tokenized = [tok.text for tok in nlp(text)]
-  if len(tokenized) < 5:
-        tokenized += ['<pad>'] * (5 - len(tokenized))
+  if len(tokenized) < 4:
+        tokenized += ['<pad>'] * (4 - len(tokenized))
   return tokenized
 
 TEXT = data.Field(tokenize=tokenize_en)
@@ -165,7 +165,7 @@ EMBEDDING_DIM = 100
 N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3,4,5]
+FILTER_SIZES = [2,3,4]
 OUTPUT_DIM = 1
 DROPOUT = 0.75
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
