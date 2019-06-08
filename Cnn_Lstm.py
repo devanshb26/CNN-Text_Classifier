@@ -309,11 +309,11 @@ def evaluate(model, iterator, criterion):
           loss = criterion(predictions, batch.label)
 
           acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
-          t=text.tolist()
-          print(t[0])
-          t=[' '.join(q) for q in t]
-          full_text+=t
-          full_probs=np.concatenate([full_probs,preds])
+#           t=text.tolist()
+#           print(t[0])
+#           t=[' '.join(q) for q in t]
+#           full_text+=t
+#           full_probs=np.concatenate([full_probs,preds])
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
@@ -325,8 +325,8 @@ def evaluate(model, iterator, criterion):
   print(cr(y_tot,pred_tot))
   print(cm(y_tot,pred_tot))
   
-  df=pd.DataFrame({'data':full_text,'probs':full_probs})
-  df.to_csv('probs_evaluation.csv')
+#   df=pd.DataFrame({'data':full_text,'probs':full_probs})
+#   df.to_csv('probs_evaluation.csv')
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
   
 import time
