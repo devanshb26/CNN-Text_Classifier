@@ -55,7 +55,7 @@ def tokenize_en(text):
 
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize='spacy',include_lengths = True)
+TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -325,7 +325,7 @@ for epoch in range(N_EPOCHS):
 
   else:
     c=c+1
-  if c==6:
+  if c==3:
     print(epoch)
     break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
