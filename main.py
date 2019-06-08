@@ -55,15 +55,15 @@ def tokenize_en(text):
   return [tok.text for tok in nlp(text)]
 
 
-TEXT = data.Field(tokenize=tokenize_en)
+TEXT = data.Field(tokenize='spacy')
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
