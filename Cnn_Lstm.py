@@ -269,7 +269,7 @@ def train(model, iterator, optimizer, criterion):
   epoch_f1=0
  
   model.train()
-
+  
   for batch in iterator:
       text, text_lengths = batch.text
       optimizer.zero_grad()
@@ -289,7 +289,7 @@ def train(model, iterator, optimizer, criterion):
       epoch_f1=epoch_f1+f1
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
  
- 
+z=0 
 def evaluate(model, iterator, criterion):
 
   epoch_loss = 0
@@ -298,7 +298,8 @@ def evaluate(model, iterator, criterion):
   y_tot=np.array([])
   pred_tot=np.array([])
   model.eval()
-
+  full_text=[]
+  full_probs=[]
   with torch.no_grad():
 
       for batch in iterator:
@@ -308,7 +309,8 @@ def evaluate(model, iterator, criterion):
           loss = criterion(predictions, batch.label)
 
           acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
-
+          full_text+=text
+          full_probs+=preds
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
@@ -319,6 +321,10 @@ def evaluate(model, iterator, criterion):
   print(len(y_tot))
   print(cr(y_tot,pred_tot))
   print(cm(y_tot,pred_tot))
+  z=z+1
+  df=pd.DataFrame({'data':full_text,'probs':full_probs})
+  if z==1:
+    df.to_csv('probs_evaluation.csv')
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
   
 import time
