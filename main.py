@@ -24,9 +24,9 @@ import spacy
 nlp = spacy.load('en')
 
 def tokenize_en(text):
-  text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", "", text)
+  text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", " ", text)
   text = re.sub(r"what's", " what is ", text)
-  text = re.sub(r"\'s", "", text)
+  text = re.sub(r"\'s", " ", text)
   text = re.sub(r"\'ve", " have ", text)
   text = re.sub(r"can't", " cannot ", text)
   text = re.sub(r"n't", " not ", text)
