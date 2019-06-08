@@ -4,13 +4,55 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
+import random
+import re
+from torch.backends import cudnn
 SEED = 1234
-
+random.seed(SEED)
+np.random.seed(SEED)
 torch.manual_seed(SEED)
+# seed = 0
+# torch.manual_seed(seed)
+# if torch.cuda.is_available():
+#     torch.cuda.manual_seed_all(seed)
 torch.backends.cudnn.deterministic = True
+import spacy
+nlp = spacy.load('en')
+def tokenize_en(text):
+  text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", " ", text)
+  text = re.sub(r"what's", "what is", text)
+  text = re.sub(r"\'s", "", text)
+  text = re.sub(r"\'ve", "have", text)
+  text = re.sub(r"can't", "cannot", text)
+  text = re.sub(r"n't", "not", text)
+  text = re.sub(r"i'm", "i am", text)
+  text = re.sub(r"\'re", "are", text)
+  text = re.sub(r"\'d", "would", text)
+  text = re.sub(r"\'ll", "will", text)
+  text = re.sub(r",", "", text)
+  text = re.sub(r"\.", "", text)
+  text = re.sub(r"!", "!", text)
+  text = re.sub(r"\/", "", text)
+  text = re.sub(r"\^", "^", text)
+  text = re.sub(r"\+", "+", text)
+  text = re.sub(r"\-", "-", text)
+  text = re.sub(r"\=", "=", text)
+  text = re.sub(r"'", "", text)
+  text = re.sub(r"<", "", text)
+  text = re.sub(r">", "", text)
+  text = re.sub(r"(\d+)(k)", r"\g<1>000", text)
+  text = re.sub(r":", ":", text)
+  text = re.sub(r" e g ", "eg", text)
+  text = re.sub(r" b g ", "bg", text)
+  text = re.sub(r" u s ", "american", text)
+  text = re.sub(r"\0s", "0", text)
+  text = re.sub(r"e - mail", "email", text)
+  text = re.sub(r"j k", "jk", text)
+  return [tok.text for tok in nlp(text)]
+
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize='spacy',include_lengths = True)
+TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -291,7 +333,7 @@ def epoch_time(start_time, end_time):
     
 N_EPOCHS = 100
 best_valid_f1 = float(0)
-
+c=0
 for epoch in range(N_EPOCHS):
 
   start_time = time.time()
@@ -303,10 +345,15 @@ for epoch in range(N_EPOCHS):
 
   epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-  if valid_f1 > best_valid_f1:
-      best_valid_f1 = valid_f1
+  if f1 > best_valid_f1:
+      best_valid_f1 = f1
+      c=0
       torch.save(model.state_dict(), 'tut4-model.pt')
-
+  else:
+    c=c+1
+  if c==3:
+    print(epoch)
+    break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
