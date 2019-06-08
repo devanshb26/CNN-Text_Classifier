@@ -310,7 +310,7 @@ def evaluate(model, iterator, criterion):
 
           acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
           full_text+=text.tolist()
-          full_probs+=preds
+          full_probs=np.concatenate([full_probs,preds])
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
