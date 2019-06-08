@@ -20,6 +20,9 @@ torch.manual_seed(SEED)
 #     torch.cuda.manual_seed_all(seed)
 torch.backends.cudnn.deterministic = True
 
+import spacy
+nlp = spacy.load('en')
+
 def tokenize_en(text):
   text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", " ", text)
   text = re.sub(r"what's", "what is ", text)
@@ -48,7 +51,7 @@ def tokenize_en(text):
   text = re.sub(r"\0s", "0", text)
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
-  return [tok.text for tok in en.tokenizer(text)]
+  return [tok.text for tok in nlp(text)]
 
 TEXT = data.Field(tokenize=tokenize_en)
 LABEL = data.LabelField(dtype = torch.float)
