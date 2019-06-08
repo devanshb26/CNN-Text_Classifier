@@ -62,8 +62,8 @@ fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -325,7 +325,7 @@ for epoch in range(N_EPOCHS):
 
   else:
     c=c+1
-  if c==3:
+  if c==6:
     print(epoch)
     break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
