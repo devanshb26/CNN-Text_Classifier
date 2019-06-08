@@ -310,6 +310,7 @@ def evaluate(model, iterator, criterion):
 
           acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
           t=text.tolist()
+          print(t[0])
           t=[' '.join(q) for q in t]
           full_text+=t
           full_probs=np.concatenate([full_probs,preds])
