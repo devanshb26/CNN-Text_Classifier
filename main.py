@@ -42,6 +42,8 @@ def tokenize_en(text):
   text = re.sub(r"\-", "-", text)
   text = re.sub(r"\=", "=", text)
   text = re.sub(r"'", "", text)
+  text = re.sub(r"<", "", text)
+  text = re.sub(r">", "", text)
   text = re.sub(r"(\d+)(k)", r"\g<1>000", text)
   text = re.sub(r":", ":", text)
   text = re.sub(r" e g ", "eg", text)
