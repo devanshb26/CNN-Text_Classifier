@@ -33,17 +33,17 @@ def tokenize_en(text):
   text = re.sub(r"\'re", "are", text)
   text = re.sub(r"\'d", "would", text)
   text = re.sub(r"\'ll", "will", text)
-  text = re.sub(r",", "", text)
-  text = re.sub(r"\.", "", text)
+  text = re.sub(r",", " ", text)
+  text = re.sub(r"\.", " ", text)
   text = re.sub(r"!", "!", text)
   text = re.sub(r"\/", "", text)
   text = re.sub(r"\^", "^", text)
   text = re.sub(r"\+", "+", text)
   text = re.sub(r"\-", "-", text)
   text = re.sub(r"\=", "=", text)
-  text = re.sub(r"'", "", text)
-  text = re.sub(r"<", "", text)
-  text = re.sub(r">", "", text)
+  text = re.sub(r"'", " ", text)
+  text = re.sub(r"<", " ", text)
+  text = re.sub(r">", " ", text)
   text = re.sub(r"(\d+)(k)", r"\g<1>000", text)
   text = re.sub(r":", " : ", text)
   text = re.sub(r" e g ", "eg", text)
@@ -53,8 +53,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized = [tok.text for tok in nlp(text)]
-#   if len(tokenized) < 3:
-#         tokenized += ['<pad>'] * (3 - len(tokenized))
+  if len(tokenized) < 3:
+        tokenized += ['<pad>'] * (3 - len(tokenized))
   return tokenized
 
 TEXT = data.Field(tokenize=tokenize_en)
