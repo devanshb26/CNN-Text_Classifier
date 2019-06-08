@@ -299,7 +299,7 @@ def evaluate(model, iterator, criterion):
   pred_tot=np.array([])
   model.eval()
   full_text=[]
-  full_probs=[]
+  full_probs=np.array([])
   with torch.no_grad():
 
       for batch in iterator:
