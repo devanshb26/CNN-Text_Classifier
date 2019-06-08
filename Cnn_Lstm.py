@@ -6,7 +6,7 @@ from torchtext import data
 from torchtext import datasets
 import numpy as np
 
-
+import pandas as pd
 import random
 import re
 from torch.backends import cudnn
@@ -56,7 +56,7 @@ def tokenize_en(text):
 
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
+TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -259,7 +259,8 @@ def binary_accuracy(preds, y):
     y_mini=(y.data).cpu().numpy()
     pred_mini=(rounded_preds.data).cpu().numpy()
     acc = correct.sum() / len(correct)
-    return acc,f1,y_mini,pred_mini
+    preds=torch.sigmoid(preds).data.cpu().numpy()
+    return acc,f1,y_mini,pred_mini,preds
                   
 def train(model, iterator, optimizer, criterion):
 
@@ -277,7 +278,7 @@ def train(model, iterator, optimizer, criterion):
 
       loss = criterion(predictions, batch.label)
 
-      acc,f1,y_mini,pred_mini= binary_accuracy(predictions, batch.label)
+      acc,f1,y_mini,pred_mini,preds= binary_accuracy(predictions, batch.label)
       #print(type(f1))
       loss.backward()
 
@@ -303,10 +304,10 @@ def evaluate(model, iterator, criterion):
       for batch in iterator:
           text, text_lengths = batch.text
           predictions = model(text,text_lengths).squeeze(1)
-
+          print(type(text))
           loss = criterion(predictions, batch.label)
 
-          acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
+          acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
 
           epoch_loss += loss.item()
           epoch_acc += acc.item()
