@@ -56,7 +56,7 @@ def tokenize_en(text):
 
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize='spacy',include_lengths = True)
+TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -289,7 +289,7 @@ def train(model, iterator, optimizer, criterion):
       epoch_f1=epoch_f1+f1
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator)
  
-z=0 
+# z=0 
 def evaluate(model, iterator, criterion):
 
   epoch_loss = 0
@@ -305,11 +305,11 @@ def evaluate(model, iterator, criterion):
       for batch in iterator:
           text, text_lengths = batch.text
           predictions = model(text,text_lengths).squeeze(1)
-          print(type(text))
+#           print(type(text))
           loss = criterion(predictions, batch.label)
 
           acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
-          full_text+=text
+          full_text+=text.tolist()
           full_probs+=preds
           epoch_loss += loss.item()
           epoch_acc += acc.item()
@@ -321,10 +321,9 @@ def evaluate(model, iterator, criterion):
   print(len(y_tot))
   print(cr(y_tot,pred_tot))
   print(cm(y_tot,pred_tot))
-  z=z+1
+  
   df=pd.DataFrame({'data':full_text,'probs':full_probs})
-  if z==1:
-    df.to_csv('probs_evaluation.csv')
+  df.to_csv('probs_evaluation.csv')
   return epoch_loss / len(iterator), epoch_acc / len(iterator),epoch_f1/len(iterator),f1,f1_macro
   
 import time
@@ -368,6 +367,7 @@ for epoch in range(N_EPOCHS):
   model.load_state_dict(torch.load('tut4-model.pt'))
 
 test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
+va_loss, va_acc,vaf1_va,f1_va,f1_v = evaluate(model, valid_iterator, criterion)
 
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin : {f1:.4f}')
