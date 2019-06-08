@@ -56,8 +56,8 @@ def tokenize_en(text):
   text = re.sub(r"j k", " jk ", text)
   text=text.strip()
   tokenized = [tok.text for tok in nlp(text)]
-  if len(tokenized) < 4:
-        tokenized += ['<pad>'] * (4 - len(tokenized))
+  if len(tokenized) < 3:
+        tokenized += ['<pad>'] * (3 - len(tokenized))
   return tokenized
 
 TEXT = data.Field(tokenize=tokenize_en)
@@ -166,7 +166,7 @@ EMBEDDING_DIM = 100
 N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3,4]
+FILTER_SIZES = [2,3]
 OUTPUT_DIM = 1
 DROPOUT = 0.75
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
