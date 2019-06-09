@@ -174,7 +174,7 @@ OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
 # dropout changed from 0.5 to 0.7
-DROPOUT = 0.2
+DROPOUT = 0.3
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 
@@ -325,7 +325,7 @@ for epoch in range(N_EPOCHS):
 
   else:
     c=c+1
-  if c==6:
+  if c==3:
     print(epoch)
     break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
