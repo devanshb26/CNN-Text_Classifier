@@ -361,7 +361,7 @@ def predict_sentiment(model):
     l=[]
     df=pd.read_csv("SubtaskB_EvaluationData_labeled.csv")
     for i in range(len(df)):
-      tokenized = toeknize_en(df['data'][i])
+      tokenized = tokenize_en(df['data'][i])
       indexed = [TEXT.vocab.stoi[t] for t in tokenized]
       length = [len(indexed)]
       tensor = torch.LongTensor(indexed).to(device)
