@@ -1,11 +1,11 @@
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
-
+from sklearn.metrics import classification_report as cr
+from sklearn.metrics import confusion_matrix as cm
 
 import random
 import re
