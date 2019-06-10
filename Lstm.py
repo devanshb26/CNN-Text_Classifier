@@ -55,7 +55,7 @@ def tokenize_en(text):
 
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
+TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -117,6 +117,11 @@ class RNN(nn.Module):
                            num_layers=n_layers, 
                            bidirectional=bidirectional, 
                            dropout=dropout)
+        from torch.nn import init
+        for layer_p in self.rnn._all_weights:
+          for p in layer_p:
+            if 'weight' in p:
+              nn.init.kaiming_normal_(p)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
         #nn.init.kaiming_normal_(self.rnn.weight)
@@ -325,9 +330,9 @@ for epoch in range(N_EPOCHS):
 
   else:
     c=c+1
-#   if c==3:
-#     print(epoch)
-#     break
+  if c==3:
+    print(epoch)
+    break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
