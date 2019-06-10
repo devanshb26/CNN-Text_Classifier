@@ -62,8 +62,8 @@ fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
-                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
+                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -313,7 +313,7 @@ for epoch in range(N_EPOCHS):
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
 
 
-model.load_state_dict(torch.load('tut4-model.pt'))
+model.load_state_dict(torch.load('tut2-model.pt'))
 
 test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
 
