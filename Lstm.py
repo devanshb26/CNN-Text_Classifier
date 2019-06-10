@@ -119,10 +119,12 @@ class RNN(nn.Module):
                            dropout=dropout)
 #         from torch.nn import init
         for name, param in self.rnn.named_parameters():
-         print(name)
+         print(param)
          if 'bias' in name:
            nn.init.constant(param, 0.0)
+           print(0)
          elif 'weight' in name:
+           print(1)
            nn.init.kaiming_normal_(param)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
