@@ -4,6 +4,7 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
+import pandas as pd
 from sklearn.metrics import classification_report as cr
 from sklearn.metrics import confusion_matrix as cm
 
@@ -64,9 +65,9 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        train = 'V1.4_Training_downsampled.csv',
+                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -386,4 +387,26 @@ test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criteri
 
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin : {f1:.4f}')
-print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac : {f1_macro:.4f}')   
+print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac : {f1_macro:.4f}')  
+
+
+def predict_sentiment(model):
+    model.eval()
+    l=[]
+    df=pd.read_csv("SubtaskB_EvaluationData_labeled.csv")
+    for i in range(len(df)):
+      tokenized = tokenize_en(df['data'][i])
+      indexed = [TEXT.vocab.stoi[t] for t in tokenized]
+      length = [len(indexed)]
+      tensor = torch.LongTensor(indexed).to(device)
+      tensor = tensor.unsqueeze(1)
+      length_tensor = torch.LongTensor(length)
+      prediction = torch.sigmoid(model(tensor, length_tensor))
+      l.append(prediction.item())
+    df['preds']=l
+    import csv
+    df.to_csv('predidctions.csv')
+    return(l)
+    
+    
+a=predict_sentiment(model)
