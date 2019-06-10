@@ -325,9 +325,9 @@ for epoch in range(N_EPOCHS):
 
   else:
     c=c+1
-#   if c==3:
-#     print(epoch)
-#     break
+  if c==6:
+    print(epoch)
+    break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
