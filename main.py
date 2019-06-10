@@ -301,7 +301,7 @@ for epoch in range(N_EPOCHS):
 
   if f1 > best_valid_f1:
       best_valid_f1 = f1
-      torch.save(model.state_dict(), 'tut4-model.pt')
+      torch.save(model.state_dict(), 'tut2-model.pt')
       c=0
   else:
     c=c+1
