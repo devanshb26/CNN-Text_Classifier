@@ -84,7 +84,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch_size changed from 64 to 16                  
-BATCH_SIZE = 16
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -338,9 +338,9 @@ for epoch in range(N_EPOCHS):
 
   else:
     c=c+1
-  if c==3:
-    print(epoch)
-    break
+#   if c==3:
+#     print(epoch)
+#     break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
