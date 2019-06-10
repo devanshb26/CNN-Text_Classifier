@@ -84,7 +84,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch_size changed from 64 to 16                  
-BATCH_SIZE = 64
+BATCH_SIZE = 16
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
