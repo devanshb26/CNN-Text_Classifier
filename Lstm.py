@@ -372,6 +372,10 @@ def predict_sentiment(model):
     df['preds']=l
     import csv
     df.to_csv('predidctions.csv')
+    return(l)
+    
+    
+a=predict_sentiment(model)
 # def binary_accuracy(preds, y):
 #     """
 #     Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
