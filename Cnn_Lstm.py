@@ -273,7 +273,7 @@ def binary_accuracy(preds, y):
     pred_mini=(rounded_preds.data).cpu().numpy()
     acc = correct.sum() / len(correct)
     preds=torch.sigmoid(preds).data.cpu().numpy()
-    return acc,f1,y_mini,pred_mini,preds
+    return acc,f1,y_mini,pred_mini
                   
 def train(model, iterator, optimizer, criterion):
 
@@ -291,7 +291,7 @@ def train(model, iterator, optimizer, criterion):
 
       loss = criterion(predictions, batch.label)
 
-      acc,f1,y_mini,pred_mini,preds= binary_accuracy(predictions, batch.label)
+      acc,f1,y_mini,pred_mini= binary_accuracy(predictions, batch.label)
       #print(type(f1))
       loss.backward()
 
@@ -321,7 +321,7 @@ def evaluate(model, iterator, criterion):
 #           print(type(text))
           loss = criterion(predictions, batch.label)
 
-          acc,f1,y_mini,pred_mini,preds = binary_accuracy(predictions, batch.label)
+          acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
 #           t=text.tolist()
 #           print(t[0])
 #           t=[' '.join(q) for q in t]
@@ -382,7 +382,7 @@ for epoch in range(N_EPOCHS):
 model.load_state_dict(torch.load('tut4-model.pt'))
 
 test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
-va_loss, va_acc,vaf1_va,f1_va,f1_v = evaluate(model, valid_iterator, criterion)
+
 
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1 : {test_f1:.4f}')
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin : {f1:.4f}')
