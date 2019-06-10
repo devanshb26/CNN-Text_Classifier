@@ -379,8 +379,7 @@ for epoch in range(N_EPOCHS):
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
 
 
-
-  model.load_state_dict(torch.load('tut4-model.pt'))
+model.load_state_dict(torch.load('tut4-model.pt'))
 
 test_loss, test_acc,test_f1,f1,f1_macro = evaluate(model, test_iterator, criterion)
 va_loss, va_acc,vaf1_va,f1_va,f1_v = evaluate(model, valid_iterator, criterion)
