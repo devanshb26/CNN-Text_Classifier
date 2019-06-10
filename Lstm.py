@@ -118,12 +118,12 @@ class RNN(nn.Module):
                            bidirectional=bidirectional, 
                            dropout=dropout)
         from torch.nn import init
-       for name, param in self.rnn.named_parameters():
-        print(name)
-        if 'bias' in name:
-          nn.init.constant(param, 0.0)
-        elif 'weight' in name:
-          nn.init.xavier_normal(param)
+        for name, param in self.rnn.named_parameters():
+         print(name)
+         if 'bias' in name:
+           nn.init.constant(param, 0.0)
+         elif 'weight' in name:
+           nn.init.xavier_normal(param)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
         #nn.init.kaiming_normal_(self.rnn.weight)
