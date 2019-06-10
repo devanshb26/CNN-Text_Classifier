@@ -1,12 +1,12 @@
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
+from sklearn.metrics import classification_report as cr
+from sklearn.metrics import confusion_matrix as cm
 
-import pandas as pd
 import random
 import re
 from torch.backends import cudnn
@@ -16,9 +16,11 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 # seed = 0
 # torch.manual_seed(seed)
-# if torch.cuda.is_available():
-#     torch.cuda.manual_seed_all(seed)
+if torch.cuda.is_available():
+  torch.cuda.manual_seed_all(SEED)
+torch.backends.cudnn.enabled = False 
 torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 import spacy
 nlp = spacy.load('en')
 def tokenize_en(text):
@@ -112,6 +114,17 @@ class RNN(nn.Module):
                            num_layers=n_layers, 
                            bidirectional=bidirectional, 
                            dropout=dropout)
+        
+        for name, param in self.rnn.named_parameters():
+         
+         if 'bias' in name:
+           nn.init.constant_(param, 0.0)
+           print(0)
+           print(param)
+         elif 'weight' in name:
+           print(1)
+           nn.init.kaiming_normal_(param)
+           
         
         #self.fc = nn.Linear(hidden_dim * 2, output_dim)
         
