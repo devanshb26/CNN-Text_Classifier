@@ -55,7 +55,7 @@ def tokenize_en(text):
   return [tok.text for tok in nlp(text)]
 
 
-TEXT = data.Field(tokenize='spacy')
+TEXT = data.Field(tokenize=tokenize_en)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
