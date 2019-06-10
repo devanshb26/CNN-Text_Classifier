@@ -57,7 +57,7 @@ def tokenize_en(text):
 
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize='spacy',include_lengths = True)
+TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
