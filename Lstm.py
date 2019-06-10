@@ -64,8 +64,8 @@ fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
-                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
+                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -186,8 +186,8 @@ HIDDEN_DIM = 256
 OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
-# dropout changed from 0.5 to 0.7
-DROPOUT = 0.4
+# dropout changed from 0.5 to 0.4
+DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 
