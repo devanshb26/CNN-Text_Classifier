@@ -82,7 +82,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch_size changed from 64 to 16                  
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -119,13 +119,15 @@ class RNN(nn.Module):
                            dropout=dropout)
 #         from torch.nn import init
         for name, param in self.rnn.named_parameters():
-         print(param)
+         
          if 'bias' in name:
-           nn.init.constant(param, 0.0)
+           nn.init.constant_(param, 0.0)
            print(0)
+           print(param)
          elif 'weight' in name:
            print(1)
            nn.init.kaiming_normal_(param)
+           print(param)
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
         #nn.init.kaiming_normal_(self.rnn.weight)
