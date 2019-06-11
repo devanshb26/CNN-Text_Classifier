@@ -54,8 +54,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
-  if len(tokenized) < 3:
-        tokenized += ['<pad>'] * (3 - len(tokenized))
+#   if len(tokenized) < 3:
+#         tokenized += ['<pad>'] * (3 - len(tokenized))
   return tokenized
 
 
@@ -65,9 +65,9 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training_downsampled.csv',
-                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
-                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
+                                        train = 'V1.4_Training.csv',
+                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
+                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
