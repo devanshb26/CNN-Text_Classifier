@@ -396,7 +396,7 @@ print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac 
 def predict_sentiment(model):
     model.eval()
     l=[]
-    df=pd.read_csv("SubtaskB_EvaluationData_labeled.csv")
+    df=pd.read_csv("SubtaskB_Trial_Test_Labeled - Copy.csv")
     for i in range(len(df)):
       tokenized = tokenize_en(df['data'][i])
       indexed = [TEXT.vocab.stoi[t] for t in tokenized]
@@ -404,7 +404,7 @@ def predict_sentiment(model):
       tensor = torch.LongTensor(indexed).to(device)
       tensor = tensor.unsqueeze(1)
       length_tensor = torch.LongTensor(length)
-      prediction = torch.sigmoid(model(tensor, length_tensor).squeeze(1))
+      prediction = torch.sigmoid(model(tensor, length_tensor))
       l.append(prediction.item())
     df['preds']=l
     import csv
