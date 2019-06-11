@@ -68,9 +68,9 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        train = 'V1.4_Training_downsampled.csv',
+                                        validation = 'SubtaskB_EvaluationData_labeled.csv',
+                                        test = 'SubtaskB_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -194,13 +194,13 @@ class RNN(nn.Module):
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
         ########
         cat = self.dropout(torch.cat(pooled, dim = 1))
-        print(cat.size())
-        print(hidden.size())
+        
         ##########
         cnn_x = torch.transpose(cat, 0, 1)
         bilstm_out = torch.transpose(hidden, 0, 1)
         cnn_bilstm_out = torch.cat((cnn_x, bilstm_out), 0)
         lstm_cnn = torch.transpose(cnn_bilstm_out, 0, 1)
+        print(lstm_cnn.size())
 #         lstm_cnn=torch.cat((cat,hidden.squeeze(0)),dim=1)
         #hidden = [batch size, hid dim * num directions]
         out=self.fc1(lstm_cnn)
@@ -398,23 +398,23 @@ print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_bin 
 print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac : {f1_macro:.4f}')  
 
 
-# def predict_sentiment(model):
-#     model.eval()
-#     l=[]
-#     df=pd.read_csv("SubtaskB_Trial_Test_Labeled - Copy.csv")
-#     for i in range(len(df)):
-#       tokenized = tokenize_en(df['data'][i])
-#       indexed = [TEXT.vocab.stoi[t] for t in tokenized]
-#       length = [len(indexed)]
-#       tensor = torch.LongTensor(indexed).to(device)
-#       tensor = tensor.unsqueeze(1)
-#       length_tensor = torch.LongTensor(length)
-#       prediction = torch.sigmoid(model(tensor, length_tensor))
-#       l.append(prediction.item())
-#     df['preds']=l
-#     import csv
-#     df.to_csv('predidctions.csv')
-#     return(l)
+def predict_sentiment(model):
+    model.eval()
+    l=[]
+    df=pd.read_csv('SubtaskB_EvaluationData_labeled.csv')
+    for i in range(len(df)):
+      tokenized = tokenize_en(df['data'][i])
+      indexed = [TEXT.vocab.stoi[t] for t in tokenized]
+      length = [len(indexed)]
+      tensor = torch.LongTensor(indexed).to(device)
+      tensor = tensor.unsqueeze(1)
+      length_tensor = torch.LongTensor(length)
+      prediction = torch.sigmoid(model(tensor, length_tensor))
+      l.append(prediction.item())
+    df['preds']=l
+    import csv
+    df.to_csv('predidctions.csv')
+    return(l)
     
     
-# a=predict_sentiment(model)
+a=predict_sentiment(model)
