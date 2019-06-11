@@ -54,7 +54,10 @@ def tokenize_en(text):
   text = re.sub(r"\0s", "0", text)
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
-  return [tok.text for tok in nlp(text)]
+  tokenized=[tok.text for tok in nlp(text)]
+  if len(tokenized) < 3:
+        tokenized += ['<pad>'] * (3 - len(tokenized))
+  return tokenized
 
 
 
