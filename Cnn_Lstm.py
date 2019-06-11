@@ -196,8 +196,12 @@ class RNN(nn.Module):
         cat = self.dropout(torch.cat(pooled, dim = 1))
         print(cat.size())
         print(hidden.size())
-         
-        lstm_cnn=torch.cat((cat,hidden.squeeze(0)),dim=1)
+        ##########
+        cnn_x = torch.transpose(cat, 0, 1)
+        bilstm_out = torch.transpose(hidden, 0, 1)
+        cnn_bilstm_out = torch.cat((cnn_x, bilstm_out), 0)
+        lstm_cnn = torch.transpose(cnn_bilstm_out, 0, 1)
+#         lstm_cnn=torch.cat((cat,hidden.squeeze(0)),dim=1)
         #hidden = [batch size, hid dim * num directions]
         out=self.fc1(lstm_cnn)
         out=self.relu(out)
