@@ -114,10 +114,10 @@ class CNN1d(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
-#         self.fc2 = nn.Linear(324,162)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 324)
+        self.fc2 = nn.Linear(324,162)
 #         self.fc3 = nn.Linear(162,2)
-#         self.fc4 = nn.Linear(2,output_dim)
+        self.fc4 = nn.Linear(162,output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -146,13 +146,13 @@ class CNN1d(nn.Module):
         #pooled_n = [batch size, n_filters]
         
         cat = self.dropout(torch.cat(pooled, dim = 1))
-#         out=self.dropout(self.relu(self.fc1(cat)))
-#         out=self.dropout(self.relu(self.fc2(out)))
+        out=self.dropout(self.relu(self.fc1(cat)))
+        out=self.relu(self.fc2(out))
 #         out=self.relu(self.fc3(out))
         
         #cat = [batch size, n_filters * len(filter_sizes)]
             
-        return self.fc1(cat)
+        return self.fc4(out)
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
