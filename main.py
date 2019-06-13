@@ -65,9 +65,9 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
-                                        test = 'SubtaskA_EvaluationData_labeled.csv',
+                                        train = 'V1.4_Training_downsampled.csv',
+                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
+                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -334,7 +334,7 @@ nlp = spacy.load('en')
 def predict_sentiment(model):
     model.eval()
     l=[]
-    df=pd.read_csv("SubtaskB_EvaluationData_labeled.csv")
+    df=pd.read_csv("SubtaskA_EvaluationData_labeled.csv")
     for i in range(len(df)):
       tokenized = tokenize_en(df['data'][i])
       indexed = [TEXT.vocab.stoi[t] for t in tokenized]
