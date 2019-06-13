@@ -89,7 +89,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch size changed from 64 to 16                  
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -199,7 +199,7 @@ class RNN(nn.Module):
         cnn_x = torch.transpose(cat, 0, 1)
         bilstm_out = torch.transpose(hidden, 0, 1)
         cnn_bilstm_out = torch.cat((cnn_x, bilstm_out), 0)
-        lstm_cnn = F.tanh(torch.transpose(cnn_bilstm_out, 0, 1))
+        lstm_cnn = torch.transpose(cnn_bilstm_out, 0, 1)
 #         print(lstm_cnn.size())
 #         lstm_cnn=torch.cat((cat,hidden.squeeze(0)),dim=1)
         #hidden = [batch size, hid dim * num directions]
@@ -218,7 +218,7 @@ HIDDEN_DIM = 256
 OUTPUT_DIM = 1
 #no. of filters from 150 to 250 for sub_B
 N_FILTERS = 250
-FILTER_SIZES = [1,2,3]
+FILTER_SIZES = [2,3]
 N_LAYERS = 2
 BIDIRECTIONAL = True
 #dropout from 0.5 to 0.3 for sub_B
