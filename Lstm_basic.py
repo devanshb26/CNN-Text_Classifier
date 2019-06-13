@@ -167,12 +167,12 @@ class RNN(nn.Module):
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
 # hidden_dim changed from 256 to 128
-HIDDEN_DIM = 256
+HIDDEN_DIM = 512
 OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
 # dropout changed from 0.3 to 0.2
-DROPOUT = 0.2
+DROPOUT = 0.3
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 
