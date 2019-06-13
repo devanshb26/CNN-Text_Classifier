@@ -155,7 +155,7 @@ class RNN(nn.Module):
         
         
         self.dropout = nn.Dropout(dropout)
-        
+         
     def forward(self, text, text_lengths):
         
         #text = [sent len, batch size]
@@ -214,7 +214,7 @@ class RNN(nn.Module):
 
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
-HIDDEN_DIM = 256
+HIDDEN_DIM = 512
 OUTPUT_DIM = 1
 #no. of filters from 150 to 250 for sub_B
 N_FILTERS = 250
