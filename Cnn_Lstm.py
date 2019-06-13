@@ -89,7 +89,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch size changed from 64 to 16                  
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -123,10 +123,10 @@ class RNN(nn.Module):
          
          if 'bias' in name:
            nn.init.constant_(param, 0.0)
-           print(0)
-           print(param)
+#            print(0)
+#            print(param)
          elif 'weight' in name:
-           print(1)
+#            print(1)
            nn.init.kaiming_normal_(param)
            
         
@@ -200,7 +200,7 @@ class RNN(nn.Module):
         bilstm_out = torch.transpose(hidden, 0, 1)
         cnn_bilstm_out = torch.cat((cnn_x, bilstm_out), 0)
         lstm_cnn = torch.transpose(cnn_bilstm_out, 0, 1)
-        print(lstm_cnn.size())
+#         print(lstm_cnn.size())
 #         lstm_cnn=torch.cat((cat,hidden.squeeze(0)),dim=1)
         #hidden = [batch size, hid dim * num directions]
         out=self.fc1(lstm_cnn)
