@@ -55,8 +55,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
-#   if len(tokenized) < 3:
-#         tokenized += ['<pad>'] * (3 - len(tokenized))
+  if len(tokenized) < 3:
+        tokenized += ['<pad>'] * (3 - len(tokenized))
   return tokenized
 
 
@@ -68,7 +68,7 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
+                                        train = 'V1.4_Training_downsampled.csv',
                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
                                         test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
 #                                         train = 'train_spacy.csv',
@@ -401,7 +401,7 @@ print(f'Test Loss: {test_loss:.3f} | Test Acc: {test_acc*100:.2f}%| Test_f1_mac 
 def predict_sentiment(model):
     model.eval()
     l=[]
-    df=pd.read_csv('SubtaskB_EvaluationData_labeled.csv')
+    df=pd.read_csv('SubtaskA_EvaluationData_labeled.csv')
     for i in range(len(df)):
       tokenized = tokenize_en(df['data'][i])
       indexed = [TEXT.vocab.stoi[t] for t in tokenized]
