@@ -114,7 +114,7 @@ class CNN1d(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 324)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
         self.fc2 = nn.Linear(324,162)
         self.fc3 = nn.Linear(162,2)
         self.fc4 = nn.Linear(2,output_dim)
@@ -152,7 +152,7 @@ class CNN1d(nn.Module):
         
         #cat = [batch size, n_filters * len(filter_sizes)]
             
-        return self.fc4(out)
+        return self.fc1(cat)
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
