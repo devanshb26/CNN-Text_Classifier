@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix as cm
 import random
 import re
 from torch.backends import cudnn
-SEED = 1234
+SEED = 123
 random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
@@ -215,8 +215,6 @@ def binary_accuracy(preds, y):
 #     f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
     y_mini=(y.data).cpu().numpy()
     pred_mini=(rounded_preds.data).cpu().numpy()
-    print(cm(y_mini,pred_mini))
-    print(cr(y_mini,pred_mini))
     f1=f1_score(y_mini,pred_mini,average='binary')
     acc = correct.sum() / len(correct)
     return acc,f1,y_mini,pred_mini
@@ -269,7 +267,8 @@ def evaluate(model, iterator, criterion):
           loss = criterion(predictions, batch.label)
 
           acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
-
+          print(cm(y_mini,pred_mini))
+          print(cr(y_mini,pred_mini))
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
