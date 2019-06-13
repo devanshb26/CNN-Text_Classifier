@@ -54,8 +54,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
-  if len(tokenized) < 5:
-        tokenized += ['<pad>'] * (5 - len(tokenized))
+  if len(tokenized) < 4:
+        tokenized += ['<pad>'] * (4 - len(tokenized))
   return tokenized
 
 
@@ -116,8 +116,8 @@ class CNN1d(nn.Module):
         
         self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 324)
         self.fc2 = nn.Linear(324,162)
-#         self.fc3 = nn.Linear(162,2)
-        self.fc4 = nn.Linear(162,output_dim)
+        self.fc3 = nn.Linear(162,2)
+        self.fc4 = nn.Linear(2,output_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -147,8 +147,8 @@ class CNN1d(nn.Module):
         
         cat = self.dropout(torch.cat(pooled, dim = 1))
         out=self.dropout(self.relu(self.fc1(cat)))
-        out=self.relu(self.fc2(out))
-#         out=self.relu(self.fc3(out))
+        out=self.dropout(self.relu(self.fc2(out)))
+        out=self.relu(self.fc3(out))
         
         #cat = [batch size, n_filters * len(filter_sizes)]
             
@@ -159,9 +159,9 @@ EMBEDDING_DIM = 100
 N_FILTERS = 192
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3,4,5]
+FILTER_SIZES = [2,3,4]
 OUTPUT_DIM = 1
-DROPOUT = 0.2
+DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM,DROPOUT, PAD_IDX)
