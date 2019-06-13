@@ -81,7 +81,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.6B.100d', 
+                 vectors = 'glove.840B.300d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -114,9 +114,9 @@ class CNN(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 250)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
 #         nn.init.kaiming_normal_(self.fc1.weight)
-        self.fc2 = nn.Linear(250,output_dim)
+#         self.fc2 = nn.Linear(250,output_dim)
 #         nn.init.kaiming_normal_(self.fc2.weight)
         self.relu=nn.ReLU()
 #         self.fc2 = nn.Linear(hidden_dim, output_dim)
@@ -156,13 +156,13 @@ class CNN(nn.Module):
 #         f1_relu=F.relu(f1)
 #         d=self.dropout_2(f1_relu)
 #         return self.fc2(d)
-        out=self.relu(out)
-        out=self.fc2(out)
+#         out=self.relu(out)
+#         out=self.fc2(out)
         return out
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
-N_FILTERS = 150
+EMBEDDING_DIM = 300
+N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
 FILTER_SIZES = [2,3]
@@ -311,9 +311,9 @@ for epoch in range(N_EPOCHS):
       c=0
   else:
     c=c+1
-#   if c==3:
-#     print(epoch)
-#     break
+  if c==3:
+    print(epoch)
+    break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {f1:.4f}')
