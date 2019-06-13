@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix as cm
 import random
 import re
 from torch.backends import cudnn
-SEED = 123
+SEED = 1234
 random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
@@ -67,7 +67,7 @@ train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
                                         validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        test = 'SubtaskA_EvaluationData_labeled.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -267,8 +267,8 @@ def evaluate(model, iterator, criterion):
           loss = criterion(predictions, batch.label)
 
           acc,f1,y_mini,pred_mini = binary_accuracy(predictions, batch.label)
-          print(cm(y_mini,pred_mini))
-          print(cr(y_mini,pred_mini))
+#           print(cm(y_mini,pred_mini))
+#           print(cr(y_mini,pred_mini))
           epoch_loss += loss.item()
           epoch_acc += acc.item()
           epoch_f1+=f1
