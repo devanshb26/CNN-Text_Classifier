@@ -167,7 +167,7 @@ class RNN(nn.Module):
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
 # hidden_dim changed from 256 to 128
-HIDDEN_DIM = 512
+HIDDEN_DIM = 256
 OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
