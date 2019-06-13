@@ -54,8 +54,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
-#   if len(tokenized) < 3:
-#         tokenized += ['<pad>'] * (3 - len(tokenized))
+  if len(tokenized) < 5:
+        tokenized += ['<pad>'] * (5 - len(tokenized))
   return tokenized
 
 
@@ -99,78 +99,72 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
                   
                   
                   
-class CNN(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, n_filters, filter_sizes, output_dim,hidden_dim,
-                 dropout, pad_idx,Dropout_2):
+class CNN1d(nn.Module):
+    def __init__(self, vocab_size, embedding_dim, n_filters, filter_sizes, output_dim, 
+                 dropout, pad_idx):
         
         super().__init__()
-                
+        
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
         
         self.convs = nn.ModuleList([
-                                    nn.Conv2d(in_channels = 1, 
+                                    nn.Conv1d(in_channels = embedding_dim, 
                                               out_channels = n_filters, 
-                                              kernel_size = (fs, embedding_dim)) 
+                                              kernel_size = fs)
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, output_dim)
-#         nn.init.kaiming_normal_(self.fc1.weight)
-#         self.fc2 = nn.Linear(250,output_dim)
-#         nn.init.kaiming_normal_(self.fc2.weight)
-        self.relu=nn.ReLU()
-#         self.fc2 = nn.Linear(hidden_dim, output_dim)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 324)
+        self.fc2 = nn.Linear(324,162)
+        self.fc3 = nn.Linear(162,2)
+        self.fc4 = nn.Linear(2,output_dim)
         
         self.dropout = nn.Dropout(dropout)
-#         self.dropout_2=nn.Dropout(Dropout_2)
         
     def forward(self, text):
         
         #text = [sent len, batch size]
         
         text = text.permute(1, 0)
-                
+        
         #text = [batch size, sent len]
         
         embedded = self.embedding(text)
                 
         #embedded = [batch size, sent len, emb dim]
         
-        embedded = embedded.unsqueeze(1)
+        embedded = embedded.permute(0, 2, 1)
         
-        #embedded = [batch size, 1, sent len, emb dim]
+        #embedded = [batch size, emb dim, sent len]
         
-        conved = [conv(embedded).squeeze(3) for conv in self.convs]
+        conved = [F.relu(conv(embedded)) for conv in self.convs]
             
         #conved_n = [batch size, n_filters, sent len - filter_sizes[n] + 1]
-#         print(conv.shape[2]+"   "+conv.shape[1] for conv in conved)        
+        
         pooled = [F.max_pool1d(conv, conv.shape[2]).squeeze(2) for conv in conved]
         
         #pooled_n = [batch size, n_filters]
         
-        cat = torch.cat(pooled, dim = 1)
-        out=self.dropout(self.fc1(cat))
-
+        cat = self.dropout(torch.cat(pooled, dim = 1))
+        out=self.dropout(self.relu(self.fc1(cat)))
+        out=self.dropout(self.relu(self.fc2(out)))
+        out=self.dropout(self.relu(self.fc3(out)))
+        
         #cat = [batch size, n_filters * len(filter_sizes)]
-#         f1=self.fc1(cat)
-#         f1_relu=F.relu(f1)
-#         d=self.dropout_2(f1_relu)
-#         return self.fc2(d)
-#         out=self.relu(out)
-#         out=self.fc2(out)
-        return out
+            
+        return self.fc4(out)
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
-N_FILTERS = 250
+N_FILTERS = 192
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3]
+FILTER_SIZES = [2,3,4,5]
 OUTPUT_DIM = 1
-DROPOUT = 0.75
+DROPOUT = 0.2
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-model = CNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX,Dropout_2)
+model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX,Dropout_2)
                   
                   
 def count_parameters(model):
