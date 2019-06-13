@@ -222,7 +222,7 @@ FILTER_SIZES = [2,3]
 N_LAYERS = 2
 BIDIRECTIONAL = True
 #dropout from 0.5 to 0.3 for sub_B
-DROPOUT = 0.7
+DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = RNN(INPUT_DIM, 
