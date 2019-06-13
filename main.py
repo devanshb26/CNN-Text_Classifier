@@ -114,11 +114,11 @@ class CNN1d(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 162)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 250)
         nn.init.kaiming_normal_(self.fc1.weight)
 #         self.fc2 = nn.Linear(324,162)
 #         self.fc3 = nn.Linear(162,2)
-        self.fc4 = nn.Linear(162,output_dim)
+        self.fc4 = nn.Linear(250,output_dim)
         nn.init.kaiming_normal_(self.fc4.weight)
         
         self.dropout = nn.Dropout(dropout)
@@ -158,12 +158,12 @@ class CNN1d(nn.Module):
                  
 INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
-N_FILTERS = 192
+N_FILTERS = 250
 HIDDEN_DIM=250
 Dropout_2=0.75
 FILTER_SIZES = [2,3]
 OUTPUT_DIM = 1
-DROPOUT = 0.8
+DROPOUT = 0.75
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM,DROPOUT, PAD_IDX)
