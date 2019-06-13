@@ -68,7 +68,7 @@ LABEL = data.LabelField(dtype = torch.float)
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
-                                        train = 'V1.4_Training.csv',
+                                        train = 'V1.4_Training_downsampled.csv',
                                         validation = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
                                         test = 'SubtaskA_EvaluationData_labeled.csv',
 #                                         train = 'train_spacy.csv',
@@ -222,7 +222,7 @@ FILTER_SIZES = [2,3]
 N_LAYERS = 2
 BIDIRECTIONAL = True
 #dropout from 0.5 to 0.3 for sub_B
-DROPOUT = 0.5
+DROPOUT = 0.7
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = RNN(INPUT_DIM, 
