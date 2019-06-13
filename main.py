@@ -59,7 +59,7 @@ def tokenize_en(text):
   return tokenized
 
 
-TEXT = data.Field(tokenize='spacy')
+TEXT = data.Field(tokenize=tokenize_en)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -106,7 +106,7 @@ class CNN1d(nn.Module):
         super().__init__()
         
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
-        
+        self.relu = nn.ReLU()
         self.convs = nn.ModuleList([
                                     nn.Conv1d(in_channels = embedding_dim, 
                                               out_channels = n_filters, 
