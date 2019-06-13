@@ -54,12 +54,12 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
-  if len(tokenized) < 4:
-        tokenized += ['<pad>'] * (4 - len(tokenized))
+  if len(tokenized) < 3:
+        tokenized += ['<pad>'] * (3 - len(tokenized))
   return tokenized
 
 
-TEXT = data.Field(tokenize='spacy')
+TEXT = data.Field(tokenize=tokenize_en)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -115,9 +115,11 @@ class CNN1d(nn.Module):
                                     ])
         
         self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 162)
+        nn.init.kaiming_normal_(self.fc1.weight)
 #         self.fc2 = nn.Linear(324,162)
 #         self.fc3 = nn.Linear(162,2)
         self.fc4 = nn.Linear(2,output_dim)
+        nn.init.kaiming_normal_(self.fc4.weight)
         
         self.dropout = nn.Dropout(dropout)
         
