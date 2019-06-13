@@ -4,6 +4,9 @@ import torch.nn.functional as F
 from torchtext import data
 from torchtext import datasets
 import numpy as np
+import pandas as pd
+from sklearn.metrics import classification_report as cr
+from sklearn.metrics import confusion_matrix as cm
 
 import random
 import re
@@ -14,9 +17,11 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 # seed = 0
 # torch.manual_seed(seed)
-# if torch.cuda.is_available():
-#     torch.cuda.manual_seed_all(seed)
+if torch.cuda.is_available():
+  torch.cuda.manual_seed_all(SEED)
+torch.backends.cudnn.enabled = False 
 torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 import spacy
 nlp = spacy.load('en')
 def tokenize_en(text):
@@ -53,7 +58,7 @@ def tokenize_en(text):
 
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
-TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
+TEXT = data.Field(tokenize='spacy',include_lengths = True)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
@@ -75,7 +80,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -160,7 +165,7 @@ class RNN(nn.Module):
         
 
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 # hidden_dim changed from 256 to 128
 HIDDEN_DIM = 256
 OUTPUT_DIM = 1
