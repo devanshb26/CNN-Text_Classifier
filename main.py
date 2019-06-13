@@ -164,7 +164,7 @@ OUTPUT_DIM = 1
 DROPOUT = 0.2
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, HIDDEN_DIM,DROPOUT, PAD_IDX,Dropout_2)
+model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM,DROPOUT, PAD_IDX)
                   
                   
 def count_parameters(model):
