@@ -48,8 +48,10 @@ def tokenize_en(text):
   text = re.sub(r"\0s", "0", text)
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
-  return [tok.text for tok in nlp(text)]
-
+  tokenized=[tok.text for tok in nlp(text)]
+  if len(tokenized) < 3:
+        tokenized += ['<pad>'] * (3 - len(tokenized))
+  return tokenized
 
 from sklearn.metrics import f1_score,classification_report as cr,confusion_matrix as cm
 TEXT = data.Field(tokenize=tokenize_en,include_lengths = True)
@@ -59,8 +61,8 @@ fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
 train_data, valid_data, test_data = data.TabularDataset.splits(
                                         path = '',
                                         train = 'V1.4_Training.csv',
-                                        validation = 'SubtaskA_EvaluationData_labeled.csv',
-                                        test = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        validation = 'SubtaskA_Trial_Test_Labeled - Copy.csv',
+                                        test = 'SubtaskA_EvaluationData_labeled.csv',
 #                                         train = 'train_spacy.csv',
 #                                         validation = 'valid_spacy.csv',
 #                                         test = 'test_spacy.csv',
@@ -74,7 +76,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.6B.100d', 
+                 vectors = 'glove.840B.300d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -189,18 +191,18 @@ class RNN(nn.Module):
         
 
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 300
 HIDDEN_DIM = 256
 OUTPUT_DIM = 1
 #no. of filters from 150 to 250 for sub_B
-N_FILTERS = 150
+N_FILTERS = 250
 FILTER_SIZES = [2,3]
 Dropout_cnn=0.75
 Hidden_cnn=250
 N_LAYERS = 2
 BIDIRECTIONAL = True
 #dropout from 0.5 to 0.3 for sub_B
-DROPOUT = 0.5
+DROPOUT = 0.2
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = RNN(INPUT_DIM, 
