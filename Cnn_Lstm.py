@@ -89,7 +89,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
 # batch size changed from 64 to 16                  
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -222,7 +222,7 @@ FILTER_SIZES = [2,3]
 N_LAYERS = 2
 BIDIRECTIONAL = True
 #dropout from 0.5 to 0.3 for sub_B
-DROPOUT = 0.5
+DROPOUT = 0.6
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = RNN(INPUT_DIM, 
@@ -380,9 +380,9 @@ for epoch in range(N_EPOCHS):
       torch.save(model.state_dict(), 'tut4-model.pt')
   else:
     c=c+1
-#   if c==3:
-#     print(epoch)
-#     break
+  if c==3:
+    print(epoch)
+    break
   print(f'Epoch: {epoch+1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
   print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}%| Train_f1 : {train_f1:.4f}')
   print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc*100:.2f}%| Valid_f1 : {valid_f1:.4f}')
