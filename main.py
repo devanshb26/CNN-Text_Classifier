@@ -215,8 +215,8 @@ def binary_accuracy(preds, y):
 #     f1=f1_score((y.data).cpu().numpy(),(rounded_preds.data).cpu().numpy(),average='binary')
     y_mini=(y.data).cpu().numpy()
     pred_mini=(rounded_preds.data).cpu().numpy()
-    print(np.unique(y_mini))
-    print(np.unique(pred_mini))
+    print(cm(y_mini,pred_mini))
+    print(cr(y_mini,pred_mini))
     f1=f1_score(y_mini,pred_mini,average='binary')
     acc = correct.sum() / len(correct)
     return acc,f1,y_mini,pred_mini
