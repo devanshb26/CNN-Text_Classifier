@@ -99,7 +99,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -127,10 +127,16 @@ import torch.nn as nn
 class RNN(nn.Module):
 # class Attention_Net(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, 
-                 bidirectional, dropout, pad_idx,dropout_2):
+                 bidirectional, dropout, pad_idx,dropout_2,batch_size):
         
         super().__init__()
 #         super(Attention_Net, self).__init__()
+
+        self.batch_size = batch_size
+        self.output_size = output_dim
+        self.hidden_size = hidden_dim
+        self.vocab_size = vocab_size
+        self.embedding_length = embedding_dim
         
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
         
@@ -153,6 +159,38 @@ class RNN(nn.Module):
 #           if isinstance(m, nn.Linear):
 #             nn.init.xavier_uniform(m.weight)
 #             m.bias.data.fill_(0.0)
+   def attention_net(self, lstm_output, final_state):
+
+      """ 
+      Now we will incorporate Attention mechanism in our LSTM model. In this new model, we will use attention to compute soft alignment score corresponding
+      between each of the hidden_state and the last hidden_state of the LSTM. We will be using torch.bmm for the batch matrix multiplication.
+
+      Arguments
+      ---------
+
+      lstm_output : Final output of the LSTM which contains hidden layer outputs for each sequence.
+      final_state : Final time-step hidden state (h_n) of the LSTM
+
+      ---------
+
+      Returns : It performs attention mechanism by first computing weights for each of the sequence present in lstm_output and and then finally computing the
+            new hidden state.
+
+      Tensor Size :
+            hidden.size() = (batch_size, hidden_size)
+            attn_weights.size() = (batch_size, num_seq)
+            soft_attn_weights.size() = (batch_size, num_seq)
+            new_hidden_state.size() = (batch_size, hidden_size)
+
+      """
+
+      hidden = final_state.squeeze(0)
+      attn_weights = torch.bmm(lstm_output, hidden.unsqueeze(2)).squeeze(2)
+      soft_attn_weights = F.softmax(attn_weights, 1)
+      new_hidden_state = torch.bmm(lstm_output.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
+
+      return new_hidden_state
+	
     def forward(self, text, text_lengths):
         
         #text = [sent len, batch size]
@@ -163,9 +201,15 @@ class RNN(nn.Module):
         
         #pack sequence
         packed_embedded = nn.utils.rnn.pack_padded_sequence(embedded, text_lengths)
-        
-        packed_output, (hidden, cell) = self.rnn(packed_embedded)
-        
+        input = packed_embedded.permute(1, 0, 2)
+#         if batch_size is None:
+        h_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
+        c_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
+# 		    else:
+#           h_0 = Variable(torch.zeros(1, batch_size, self.hidden_size).cuda())
+#           c_0 = Variable(torch.zeros(1, batch_size, self.hidden_size).cuda())
+        packed_output, (hidden, cell) = self.rnn(packed_embedded,(h_0,c_0))
+        packed_output = packed_output.permute(1, 0, 2)
         #unpack sequence
         output, output_lengths = nn.utils.rnn.pad_packed_sequence(packed_output)
 
@@ -180,17 +224,17 @@ class RNN(nn.Module):
         
         hidden = self.dropout_2(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
         
-               
+        attn_output = self.attention_net(packed_output, hidden)      
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
-        out = self.fc1(hidden.squeeze(0))
-        
+#         out = self.fc1(hidden.squeeze(0))
+        out = self.fc1(attn_output)
 #         out=self.relu(out)
         return out
         
 
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 # hidden_dim changed from 256 to 128
 HIDDEN_DIM = 256
 OUTPUT_DIM = 1
@@ -212,7 +256,7 @@ model = RNN(INPUT_DIM,
             BIDIRECTIONAL, 
             DROPOUT, 
             PAD_IDX,
-           dropout_2)
+           dropout_2,BATCH_SIZE)
             
           
             
