@@ -147,7 +147,7 @@ TEXT.build_vocab(train_data,
 
 LABEL.build_vocab(train_data)
                   
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -224,8 +224,8 @@ INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 100
 N_FILTERS = 192
 HIDDEN_DIM=250
-Dropout_2=0.4
-FILTER_SIZES = [2,3]
+Dropout_2=0.2
+FILTER_SIZES = [2,3,4]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
