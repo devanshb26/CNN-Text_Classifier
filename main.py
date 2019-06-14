@@ -81,12 +81,12 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
                   
-BATCH_SIZE = 64
+BATCH_SIZE = 128
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -114,11 +114,13 @@ class CNN1d(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 250)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 364)
         nn.init.kaiming_normal_(self.fc1.weight)
-#         self.fc2 = nn.Linear(324,162)
-#         self.fc3 = nn.Linear(162,2)
-        self.fc4 = nn.Linear(250,output_dim)
+        self.fc2 = nn.Linear(324,162)
+        nn.init.kaiming_normal_(self.fc2.weight)
+        self.fc3 = nn.Linear(162,2)
+        nn.init.kaiming_normal_(self.fc3.weight)
+        self.fc4 = nn.Linear(2,output_dim)
         nn.init.kaiming_normal_(self.fc4.weight)
         
         self.dropout = nn.Dropout(dropout)
@@ -147,23 +149,24 @@ class CNN1d(nn.Module):
         
         #pooled_n = [batch size, n_filters]
         
-        cat = self.dropout(torch.cat(pooled, dim = 1))
+        cat = torch.cat(pooled, dim = 1)
+        cat=self.dropout(cat)
         out=self.dropout(self.relu(self.fc1(cat)))
-#         out=self.dropout(self.relu(self.fc2(out)))
-#         out=self.relu(self.fc3(out))
-        
+        out=self.dropout(self.relu(self.fc2(out)))
+        out=self.relu(self.fc3(out))
+        out=self.dropout(out)
         #cat = [batch size, n_filters * len(filter_sizes)]
             
         return self.fc4(out)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
-N_FILTERS = 250
+EMBEDDING_DIM = 100
+N_FILTERS = 192
 HIDDEN_DIM=250
 Dropout_2=0.75
-FILTER_SIZES = [2,3]
+FILTER_SIZES = [2,3,4,5]
 OUTPUT_DIM = 1
-DROPOUT = 0.75
+DROPOUT = 0.2
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM,DROPOUT, PAD_IDX)
