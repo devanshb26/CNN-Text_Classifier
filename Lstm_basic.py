@@ -139,6 +139,8 @@ class RNN(nn.Module):
                            num_layers=n_layers, 
                            bidirectional=bidirectional, 
                            dropout=dropout)
+        
+        self.relu=nn.ReLU()
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
         self.fc1 = nn.Linear(hidden_dim * 2, 25)
