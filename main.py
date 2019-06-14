@@ -101,7 +101,7 @@ train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
                   
 class CNN1d(nn.Module):
     def __init__(self, vocab_size, embedding_dim, n_filters, filter_sizes, output_dim, 
-                 dropout, pad_idx):
+                 dropout, pad_idx,dropout_2):
         
         super().__init__()
         
@@ -124,7 +124,7 @@ class CNN1d(nn.Module):
         nn.init.kaiming_normal_(self.fc4.weight)
         
         self.dropout = nn.Dropout(dropout)
-        
+        self.dropout_2=nn.Dropout(dropout_2)
     def forward(self, text):
         
         #text = [sent len, batch size]
@@ -138,7 +138,7 @@ class CNN1d(nn.Module):
         #embedded = [batch size, sent len, emb dim]
         
         embedded = embedded.permute(0, 2, 1)
-        
+        embedded=self.dropout(embedded)
         #embedded = [batch size, emb dim, sent len]
         
         conved = [F.relu(conv(embedded)) for conv in self.convs]
@@ -150,9 +150,9 @@ class CNN1d(nn.Module):
         #pooled_n = [batch size, n_filters]
         
         cat = torch.cat(pooled, dim = 1)
-        cat=self.dropout(cat)
-        out=self.dropout(self.relu(self.fc1(cat)))
-        out=self.dropout(self.relu(self.fc2(out)))
+        cat=self.dropout_2(cat)
+        out=self.dropout_2(self.relu(self.fc1(cat)))
+        out=self.dropout_2(self.relu(self.fc2(out)))
         out=self.relu(self.fc3(out))
 #         out=self.dropout(out)
         #cat = [batch size, n_filters * len(filter_sizes)]
@@ -163,13 +163,13 @@ INPUT_DIM = len(TEXT.vocab)
 EMBEDDING_DIM = 300
 N_FILTERS = 192
 HIDDEN_DIM=250
-Dropout_2=0.75
+Dropout_2=0.2
 FILTER_SIZES = [2,3]
 OUTPUT_DIM = 1
-DROPOUT = 0.2
+DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
-model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM,DROPOUT, PAD_IDX)
+model = CNN1d(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM,DROPOUT, PAD_IDX,Dropout_2)
                   
                   
 def count_parameters(model):
