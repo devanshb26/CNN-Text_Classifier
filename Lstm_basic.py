@@ -128,6 +128,7 @@ class RNN(nn.Module):
 # class Attention_Net(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, 
                  bidirectional, dropout, pad_idx,dropout_2,batch_size):
+		
         
         super().__init__()
 #         super(Attention_Net, self).__init__()
@@ -159,8 +160,7 @@ class RNN(nn.Module):
 #           if isinstance(m, nn.Linear):
 #             nn.init.xavier_uniform(m.weight)
 #             m.bias.data.fill_(0.0)
-   def attention_net(self, lstm_output, final_state):
-
+    def attention_net(self, lstm_output, final_state):
       """ 
       Now we will incorporate Attention mechanism in our LSTM model. In this new model, we will use attention to compute soft alignment score corresponding
       between each of the hidden_state and the last hidden_state of the LSTM. We will be using torch.bmm for the batch matrix multiplication.
@@ -184,12 +184,12 @@ class RNN(nn.Module):
 
       """
 
-      hidden = final_state.squeeze(0)
-      attn_weights = torch.bmm(lstm_output, hidden.unsqueeze(2)).squeeze(2)
-      soft_attn_weights = F.softmax(attn_weights, 1)
-      new_hidden_state = torch.bmm(lstm_output.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
+	      hidden = final_state.squeeze(0)
+	      attn_weights = torch.bmm(lstm_output, hidden.unsqueeze(2)).squeeze(2)
+	      soft_attn_weights = F.softmax(attn_weights, 1)
+	      new_hidden_state = torch.bmm(lstm_output.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
 
-      return new_hidden_state
+	      return new_hidden_state
 	
     def forward(self, text, text_lengths):
         
