@@ -185,16 +185,15 @@ class RNN(nn.Module):
         #embedded = [sent len, batch size, emb dim]
         
         #pack sequence
-        packed_embedded = nn.utils.rnn.pack_padded_sequence(embedded, text_lengths)
-        input = packed_embedded.permute(1, 0, 2)
-#         if batch_size is None:
+#         packed_embedded = nn.utils.rnn.pack_padded_sequence(embedded, text_lengths)
+        input = embedded.permute(1, 0, 2)
+
         h_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
         c_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
-# 		    else:
-#           h_0 = Variable(torch.zeros(1, batch_size, self.hidden_size).cuda())
-#           c_0 = Variable(torch.zeros(1, batch_size, self.hidden_size).cuda())
-        packed_output, (hidden, cell) = self.rnn(packed_embedded,(h_0,c_0))
-        packed_output = packed_output.permute(1, 0, 2)
+        
+        packed_output, (hidden, cell) = self.rnn(input,(h_0,c_0))
+#         packed_output, (hidden, cell) = self.rnn(packed_embedded,(h_0,c_0))
+#         packed_output = packed_output.permute(1, 0, 2)
         #unpack sequence
         output, output_lengths = nn.utils.rnn.pad_packed_sequence(packed_output)
 
@@ -206,7 +205,7 @@ class RNN(nn.Module):
         
         #concat the final forward (hidden[-2,:,:]) and backward (hidden[-1,:,:]) hidden layers
         #and apply dropout
-        
+        packed_output.permute(1, 0, 2)
         hidden = self.dropout_2(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
         
         attn_output = self.attention(packed_output, hidden)      
