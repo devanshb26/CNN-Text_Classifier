@@ -81,7 +81,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -114,13 +114,13 @@ class CNN1d(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 768)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 364)
         nn.init.kaiming_normal_(self.fc1.weight)
-        self.fc2 = nn.Linear(768,364)
+        self.fc2 = nn.Linear(364,162)
         nn.init.kaiming_normal_(self.fc2.weight)
-        self.fc3 = nn.Linear(364,162)
+        self.fc3 = nn.Linear(162,50)
         nn.init.kaiming_normal_(self.fc3.weight)
-        self.fc4 = nn.Linear(162,output_dim)
+        self.fc4 = nn.Linear(50,output_dim)
         nn.init.kaiming_normal_(self.fc4.weight)
         
         self.dropout = nn.Dropout(dropout)
@@ -160,11 +160,11 @@ class CNN1d(nn.Module):
         return self.fc4(out)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 N_FILTERS = 192
 HIDDEN_DIM=250
-Dropout_2=0.2
-FILTER_SIZES = [2,3]
+Dropout_2=0.4
+FILTER_SIZES = [2,3,4]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
