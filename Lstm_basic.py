@@ -193,7 +193,7 @@ class RNN(nn.Module):
         c_0 = Variable(torch.zeros(1, self.batch_size, self.hidden_size).cuda())
         
         packed_output, (hidden, cell) = self.rnn(input)
-	print(hidden.size())
+	
 #         packed_output, (hidden, cell) = self.rnn(packed_embedded,(h_0,c_0))
 #         packed_output = packed_output.permute(1, 0, 2)
         #unpack sequence
