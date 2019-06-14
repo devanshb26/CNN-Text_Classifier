@@ -143,10 +143,10 @@ class RNN(nn.Module):
         self.relu=nn.ReLU()
 #         self.attention_layer = Attention(hidden_dim * 2,128)
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
-        self.fc1 = nn.Linear(hidden_dim * 2, 25)
+        self.fc1 = nn.Linear(hidden_dim * 2, output_dim)
         nn.init.kaiming_normal_(self.fc1.weight)
-        self.fc2 = nn.Linear(25,output_dim)
-        nn.init.kaiming_normal_(self.fc2.weight)
+#         self.fc2 = nn.Linear(25,output_dim)
+#         nn.init.kaiming_normal_(self.fc2.weight)
         self.dropout = nn.Dropout(dropout)
         self.dropout_2 = nn.Dropout(dropout_2)
 #         for m in self.modules():
@@ -178,13 +178,13 @@ class RNN(nn.Module):
         #concat the final forward (hidden[-2,:,:]) and backward (hidden[-1,:,:]) hidden layers
         #and apply dropout
         
-        hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
+        hidden = self.dropout_2(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
         
                
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
-        out = self.dropout_2(self.relu(self.fc1(hidden.squeeze(0))))
-        out = self.fc2(out)
+        out = self.fc1(hidden.squeeze(0))
+        
 #         out=self.relu(out)
         return out
         
