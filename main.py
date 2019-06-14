@@ -85,35 +85,35 @@ def tokenize_en(text):
   text = re.sub(r"[\&]+", r" \& ", text)
   text = re.sub(r"[\+]+", r" \+ ", text)
 
-#   text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", " ", text)
-#   text = re.sub(r"what's", "what is", text)
-#   text = re.sub(r"\'s", "", text)
-#   text = re.sub(r"\'ve", "have", text)
-#   text = re.sub(r"can't", "cannot", text)
-#   text = re.sub(r"n't", "not", text)
-#   text = re.sub(r"i'm", "i am", text)
-#   text = re.sub(r"\'re", "are", text)
-#   text = re.sub(r"\'d", "would", text)
-#   text = re.sub(r"\'ll", "will", text)
-#   text = re.sub(r",", "", text)
-#   text = re.sub(r"\.", "", text)
-#   text = re.sub(r"!", "!", text)
-#   text = re.sub(r"\/", "", text)
-#   text = re.sub(r"\^", "^", text)
-#   text = re.sub(r"\+", "+", text)
-#   text = re.sub(r"\-", "-", text)
-#   text = re.sub(r"\=", "=", text)
-#   text = re.sub(r"'", "", text)
-#   text = re.sub(r"<", "", text)
-#   text = re.sub(r">", "", text)
-#   text = re.sub(r"(\d+)(k)", r"\g<1>000", text)
-#   text = re.sub(r":", ":", text)
-#   text = re.sub(r" e g ", "eg", text)
-#   text = re.sub(r" b g ", "bg", text)
-#   text = re.sub(r" u s ", "american", text)
-#   text = re.sub(r"\0s", "0", text)
-#   text = re.sub(r"e - mail", "email", text)
-#   text = re.sub(r"j k", "jk", text)
+  text = re.sub(r"[^A-Za-z0-9^,!.\/'+-=]", " ", text)
+  text = re.sub(r"what's", "what is", text)
+  text = re.sub(r"\'s", "", text)
+  text = re.sub(r"\'ve", "have", text)
+  text = re.sub(r"can't", "cannot", text)
+  text = re.sub(r"n't", "not", text)
+  text = re.sub(r"i'm", "i am", text)
+  text = re.sub(r"\'re", "are", text)
+  text = re.sub(r"\'d", "would", text)
+  text = re.sub(r"\'ll", "will", text)
+  text = re.sub(r",", "", text)
+  text = re.sub(r"\.", "", text)
+  text = re.sub(r"!", "!", text)
+  text = re.sub(r"\/", "", text)
+  text = re.sub(r"\^", "^", text)
+  text = re.sub(r"\+", "+", text)
+  text = re.sub(r"\-", "-", text)
+  text = re.sub(r"\=", "=", text)
+  text = re.sub(r"'", "", text)
+  text = re.sub(r"<", "", text)
+  text = re.sub(r">", "", text)
+  text = re.sub(r"(\d+)(k)", r"\g<1>000", text)
+  text = re.sub(r":", ":", text)
+  text = re.sub(r" e g ", "eg", text)
+  text = re.sub(r" b g ", "bg", text)
+  text = re.sub(r" u s ", "american", text)
+  text = re.sub(r"\0s", "0", text)
+  text = re.sub(r"e - mail", "email", text)
+  text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
   if len(tokenized) < 3:
         tokenized += ['<pad>'] * (3 - len(tokenized))
@@ -142,7 +142,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.840B.300d', 
+                 vectors = 'glove.6B.100d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -221,11 +221,11 @@ class CNN1d(nn.Module):
         return self.fc4(out)
                  
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 300
+EMBEDDING_DIM = 100
 N_FILTERS = 192
 HIDDEN_DIM=250
-Dropout_2=0.2
-FILTER_SIZES = [2,3,4]
+Dropout_2=0.4
+FILTER_SIZES = [2,3,4,5]
 OUTPUT_DIM = 1
 DROPOUT = 0.5
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
