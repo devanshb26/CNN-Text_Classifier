@@ -114,13 +114,13 @@ class CNN1d(nn.Module):
                                     for fs in filter_sizes
                                     ])
         
-        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 364)
+        self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 768)
         nn.init.kaiming_normal_(self.fc1.weight)
-        self.fc2 = nn.Linear(364,162)
+        self.fc2 = nn.Linear(768,364)
         nn.init.kaiming_normal_(self.fc2.weight)
-        self.fc3 = nn.Linear(162,2)
+        self.fc3 = nn.Linear(364,162)
         nn.init.kaiming_normal_(self.fc3.weight)
-        self.fc4 = nn.Linear(2,output_dim)
+        self.fc4 = nn.Linear(162,output_dim)
         nn.init.kaiming_normal_(self.fc4.weight)
         
         self.dropout = nn.Dropout(dropout)
@@ -154,7 +154,7 @@ class CNN1d(nn.Module):
         out=self.dropout(self.relu(self.fc1(cat)))
         out=self.dropout(self.relu(self.fc2(out)))
         out=self.relu(self.fc3(out))
-        
+#         out=self.dropout(out)
         #cat = [batch size, n_filters * len(filter_sizes)]
             
         return self.fc4(out)
