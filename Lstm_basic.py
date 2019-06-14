@@ -197,7 +197,7 @@ class RNN(nn.Module):
 #         packed_output, (hidden, cell) = self.rnn(packed_embedded,(h_0,c_0))
 #         packed_output = packed_output.permute(1, 0, 2)
         #unpack sequence
-        output, output_lengths = nn.utils.rnn.pad_packed_sequence(packed_output)
+#         output, output_lengths = nn.utils.rnn.pad_packed_sequence(packed_output)
 
         #output = [sent len, batch size, hid dim * num directions]
         #output over padding tokens are zero tensors
