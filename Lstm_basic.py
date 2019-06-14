@@ -116,8 +116,8 @@ def tokenize_en(text):
   text = re.sub(r"e - mail", "email", text)
   text = re.sub(r"j k", "jk", text)
   tokenized=[tok.text for tok in nlp(text)]
-  if len(tokenized) < 3:
-        tokenized += ['<pad>'] * (3 - len(tokenized))
+#   if len(tokenized) < 3:
+#         tokenized += ['<pad>'] * (3 - len(tokenized))
   return tokenized
 
 
