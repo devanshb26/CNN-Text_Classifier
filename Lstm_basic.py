@@ -143,7 +143,7 @@ class RNN(nn.Module):
 #         torch.nn.init.xavier_uniform(self.rnn.weight)
         self.fc1 = nn.Linear(hidden_dim * 2, 25)
         nn.init.kaiming_normal_(self.fc1.weight)
-        self.fc1 = nn.Linear(25,output_dim)
+        self.fc2 = nn.Linear(25,output_dim)
         nn.init.kaiming_normal_(self.fc2.weight)
         self.dropout = nn.Dropout(dropout)
         self.dropout_2 = nn.Dropout(dropout_2)
