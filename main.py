@@ -154,7 +154,7 @@ class CNN1d(nn.Module):
         out=self.dropout(self.relu(self.fc1(cat)))
         out=self.dropout(self.relu(self.fc2(out)))
         out=self.relu(self.fc3(out))
-        out=self.dropout(out)
+        
         #cat = [batch size, n_filters * len(filter_sizes)]
             
         return self.fc4(out)
