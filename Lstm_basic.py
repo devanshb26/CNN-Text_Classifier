@@ -197,8 +197,8 @@ OUTPUT_DIM = 1
 N_LAYERS = 2
 BIDIRECTIONAL = True
 # dropout changed from 0.3 to 0.5
-DROPOUT = 0.5
-dropout_2=0.5
+DROPOUT = 0.3
+dropout_2=0.3
 PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]
 
 
