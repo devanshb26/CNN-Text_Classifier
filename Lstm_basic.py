@@ -160,15 +160,25 @@ class RNN(nn.Module):
 #           if isinstance(m, nn.Linear):
 #             nn.init.xavier_uniform(m.weight)
 #             m.bias.data.fill_(0.0)
-    def attention_net(self, lstm_output, final_state):
-	hidden = final_state.squeeze(0)
+
+		
+#     def attention_net(self, lstm_output, final_state):
+# 	hidden = final_state.squeeze(0)
+#         attn_weights = torch.bmm(lstm_output, hidden.unsqueeze(2)).squeeze(2)
+#         soft_attn_weights = F.softmax(attn_weights, 1)
+#         new_hidden_state = torch.bmm(lstm_output.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
+		
+# 	return new_hidden_state
+    def attention(self, lstm_output, final_state):
+        hidden = final_state.squeeze(0)
         attn_weights = torch.bmm(lstm_output, hidden.unsqueeze(2)).squeeze(2)
         soft_attn_weights = F.softmax(attn_weights, 1)
         new_hidden_state = torch.bmm(lstm_output.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
 		
 	return new_hidden_state
-	
+		
     def forward(self, text, text_lengths):
+	
         
         #text = [sent len, batch size]
         
@@ -201,7 +211,7 @@ class RNN(nn.Module):
         
         hidden = self.dropout_2(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
         
-        attn_output = self.attention_net(packed_output, hidden)      
+        attn_output = self.attention(packed_output, hidden)      
 #         hidden = [batch size, hid dim * num directions]
 #         h_lstm_atten = self.attention_layer(hidden)
 #         out = self.fc1(hidden.squeeze(0))
