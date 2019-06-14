@@ -120,7 +120,7 @@ def tokenize_en(text):
   return tokenized
 
 
-TEXT = data.Field(tokenize=tokeinize_en)
+TEXT = data.Field(tokenize=tokenize_en)
 LABEL = data.LabelField(dtype = torch.float)
 
 fields = [(None,None),(None,None),('text', TEXT),('label', LABEL)]
