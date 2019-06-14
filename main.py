@@ -116,7 +116,7 @@ class CNN1d(nn.Module):
         
         self.fc1 = nn.Linear(len(filter_sizes) * n_filters, 364)
         nn.init.kaiming_normal_(self.fc1.weight)
-        self.fc2 = nn.Linear(324,162)
+        self.fc2 = nn.Linear(364,162)
         nn.init.kaiming_normal_(self.fc2.weight)
         self.fc3 = nn.Linear(162,2)
         nn.init.kaiming_normal_(self.fc3.weight)
