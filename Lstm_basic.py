@@ -99,7 +99,7 @@ MAX_VOCAB_SIZE = 25_000
 
 TEXT.build_vocab(train_data, 
                  max_size = MAX_VOCAB_SIZE, 
-                 vectors = 'glove.6B.100d', 
+                 vectors = 'glove.840B.300d', 
                  unk_init = torch.Tensor.normal_)
 
 LABEL.build_vocab(train_data)
@@ -190,7 +190,7 @@ class RNN(nn.Module):
         
 
 INPUT_DIM = len(TEXT.vocab)
-EMBEDDING_DIM = 100
+EMBEDDING_DIM = 300
 # hidden_dim changed from 256 to 128
 HIDDEN_DIM = 128
 OUTPUT_DIM = 1
